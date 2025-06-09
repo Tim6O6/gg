@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Sapling" load_steps=8 format=3 uid="uid://cfxj2kgey0t27"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_maeeo"]
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="2_ec1j5"]
+[ext_resource type="Resource" uid="uid://kfaja00m2jvr" path="res://Items/superfruit.tres" id="3_maeeo"]
+[ext_resource type="Script" uid="uid://ccnlaupl3qndu" path="res://Items/scripts/sapling.gd" id="4_7hppu"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="5_crs7b"]
+
+[sub_resource type="Resource" id="Resource_ec1j5"]
+script = ExtResource("2_ec1j5")
+item = ExtResource("3_maeeo")
+quantity = 3
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2rbo"]
+atlas = ExtResource("5_crs7b")
+region = Rect2(32, 144, 16, 16)
+
+[resource]
+script = ExtResource("4_7hppu")
+grow_levels = 7
+grow_time = 60.0
+grow_reward_xp = 100
+grow_rewards = Array[ExtResource("2_ec1j5")]([SubResource("Resource_ec1j5")])
+name = "Семя супер-растения"
+description = "Семя супер-растения. Растет 60 секунд"
+texture = SubResource("AtlasTexture_y2rbo")
+cost = 20
+effects = Array[ExtResource("1_maeeo")]([])
+metadata/_custom_type_script = "uid://ccnlaupl3qndu"

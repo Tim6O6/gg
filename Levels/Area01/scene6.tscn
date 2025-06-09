@@ -1,0 +1,695 @@
+[gd_scene load_steps=43 format=4 uid="uid://dywyblmbixwli"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_d1iyd"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_c5lho"]
+[ext_resource type="PackedScene" uid="uid://31pn6icmlp0r" path="res://Tile Maps/dungeon_tilemap_layer.tscn" id="3_makdq"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_llwue"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_wxdnp"]
+[ext_resource type="Script" uid="uid://j4py0ng56jx4" path="res://Levels/Area01/scene6_angry_student.gd" id="8_c5lho"]
+[ext_resource type="Resource" uid="uid://dhr3255mp4lox" path="res://quests/beat_boss.tres" id="8_makdq"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="9_lnihe"]
+[ext_resource type="PackedScene" uid="uid://de52jxqemilpu" path="res://GeneralNodes/PersistentDataHandler/persistent-data-handler.tscn" id="9_t2drd"]
+[ext_resource type="Texture2D" uid="uid://nkxr4y0pj6c8" path="res://assets/Сосед(мальчик)_спрайт.png" id="10_cqwae"]
+[ext_resource type="PackedScene" uid="uid://cpvl4rru3x52v" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="11_llwue"]
+[ext_resource type="Resource" uid="uid://dsn25brd3t8mu" path="res://Items/souvenir.tres" id="12_iub4c"]
+[ext_resource type="PackedScene" uid="uid://c041sb462wu22" path="res://GeneralNodes/HitBox/hit_box.tscn" id="12_wxdnp"]
+[ext_resource type="AudioStream" uid="uid://b5yd3deroq2i8" path="res://Levels/Dungeon01/dark_wizard/audio/boss_destroy.wav" id="13_xx5mc"]
+[ext_resource type="PackedScene" uid="uid://bxb6iayrmx1rw" path="res://Levels/Dungeon01/dark_wizard/energy_beam.tscn" id="14_7wk0y"]
+[ext_resource type="PackedScene" uid="uid://d0wf2qqncvj5t" path="res://GeneralNodes/ItemDropper/item_dropper.tscn" id="15_lnihe"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="16_xeeba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jbka"]
+size = Vector2(700, 36)
+
+[sub_resource type="Gradient" id="Gradient_4e8fp"]
+offsets = PackedFloat32Array(0.237443, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pva20"]
+gradient = SubResource("Gradient_4e8fp")
+width = 48
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Animation" id="Animation_ljo40"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_0c7ue"]
+resource_name = "down"
+length = 0.3334
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_483od"]
+resource_name = "side"
+length = 0.3334
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_5va8j"]
+resource_name = "up"
+length = 0.3334
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ij6gb"]
+_data = {
+&"RESET": SubResource("Animation_ljo40"),
+&"down": SubResource("Animation_0c7ue"),
+&"side": SubResource("Animation_483od"),
+&"up": SubResource("Animation_5va8j")
+}
+
+[sub_resource type="Gradient" id="Gradient_6tng6"]
+offsets = PackedFloat32Array(0.273973, 1)
+colors = PackedColorArray(0.771695, 0, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hlp6j"]
+gradient = SubResource("Gradient_6tng6")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ihji"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drbbp"]
+radius = 25.0
+
+[sub_resource type="Animation" id="Animation_w5b05"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x7sg7"]
+resource_name = "appear"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -48), Vector2(0, -30), Vector2(0, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jh45c"]
+resource_name = "cast_spell"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.2, 3),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -34), Vector2(0, -34), Vector2(0, -30), Vector2(0, -38), Vector2(0, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 0.8, 1.2, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1es0q"]
+resource_name = "destroy"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2.9),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -34), Vector2(0, -40), Vector2(0, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(3, 2, 2, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_xx5mc")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 0.8, 1.1, 1.3815, 1.7, 2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [Vector2(10, -32)],
+"method": &"explosion"
+}, {
+"args": [Vector2(2, -15)],
+"method": &"explosion"
+}, {
+"args": [Vector2(-14, -36)],
+"method": &"explosion"
+}, {
+"args": [Vector2(12, -29)],
+"method": &"explosion"
+}, {
+"args": [Vector2(-2, -22)],
+"method": &"explosion"
+}, {
+"args": [Vector2(2, -27)],
+"method": &"explosion"
+}, {
+"args": [Vector2(6, -32)],
+"method": &"explosion"
+}, {
+"args": [Vector2(8, -24)],
+"method": &"explosion"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6iwoi"]
+resource_name = "disappear"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -34), Vector2(0, -30), Vector2(0, -48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lsjdw"]
+resource_name = "idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -34), Vector2(0, -40), Vector2(0, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ar58h"]
+_data = {
+&"RESET": SubResource("Animation_w5b05"),
+&"appear": SubResource("Animation_x7sg7"),
+&"cast_spell": SubResource("Animation_jh45c"),
+&"destroy": SubResource("Animation_1es0q"),
+&"disappear": SubResource("Animation_6iwoi"),
+&"idle": SubResource("Animation_lsjdw")
+}
+
+[sub_resource type="Animation" id="Animation_v6mpl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lofhv"]
+resource_name = "damaged"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(3, 2, 1.5, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_488ur"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloakSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s46g"]
+_data = {
+&"RESET": SubResource("Animation_v6mpl"),
+&"damaged": SubResource("Animation_lofhv"),
+&"default": SubResource("Animation_488ur")
+}
+
+[sub_resource type="Gradient" id="Gradient_r6x6s"]
+offsets = PackedFloat32Array(0.625571, 0.858447, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4x5j"]
+gradient = SubResource("Gradient_r6x6s")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_d1iyd")
+music = ExtResource("2_c5lho")
+
+[node name="DungeonTilemapLayer" parent="." instance=ExtResource("3_makdq")]
+z_index = -1
+scale = Vector2(1.17844, 1.17844)
+tile_map_data = PackedByteArray("AAABAAMAAAAEAAEAAAABAAQAAAAEAAEAAAABAAUAAAAEAAEAAAABAAYAAAAEAAEAAAABAAcAAAAEAAEAAAABAAgAAAAEAAEAAAABAAkAAAAEAAEAAAABAAoAAAAEAAEAAAABAAsAAAAEAAEAAAABAAwAAAAEAAEAAAABAA0AAAAEAAEAAAABAA4AAAAEAAEAAAABAA8AAAAEAAEAAAABABAAAAAEAAEAAAABABEAAAAEAAEAAAABABIAAAAEAAIAAAABABMAAAABAAQAAAACAAMAAAAFAAEAAAACAAQAAAAFAAEAAAACAAUAAAAFAAEAAAACAAYAAAAFAAEAAAACAAcAAAAFAAEAAAACAAgAAAAFAAEAAAACAAkAAAAFAAEAAAACAAoAAAAFAAEAAAACAAsAAAAFAAEAAAACAAwAAAAFAAEAAAACAA0AAAAFAAEAAAACAA4AAAAFAAEAAAACAA8AAAAFAAEAAAACABAAAAAFAAEAAAACABEAAAAFAAEAAAACABIAAAAFAAIAAAACABMAAAABAAQAAAADAAMAAAAIAAMAAAADAAQAAAAFAAEAAAADAAUAAAAFAAEAAAADAAYAAAAFAAEAAAADAAcAAAAFAAMAAAADAAgAAAAFAAEAAAADAAkAAAAFAAEAAAADAAoAAAAFAAEAAAADAAsAAAAFAAEAAAADAAwAAAAFAAEAAAADAA0AAAAFAAEAAAADAA4AAAAFAAEAAAADAA8AAAAFAAEAAAADABAAAAAFAAEAAAADABEAAAAIAAMAAAADABIAAAAFAAIAAAADABMAAAABAAQAAAAEAAMAAAAFAAEAAAAEAAQAAAAFAAEAAAAEAAUAAAAEAAMAAAAEAAYAAAAFAAEAAAAEAAcAAAAFAAEAAAAEAAgAAAAFAAEAAAAEAAkAAAAEAAMAAAAEAAoAAAAFAAEAAAAEAAsAAAAFAAEAAAAEAAwAAAAFAAEAAAAEAA0AAAAFAAEAAAAEAA4AAAAFAAEAAAAEAA8AAAAFAAEAAAAEABAAAAAFAAEAAAAEABEAAAAFAAEAAAAEABIAAAAFAAIAAAAEABMAAAABAAQAAAAFAAMAAAAFAAEAAAAFAAQAAAAFAAEAAAAFAAUAAAAHAAAAAAAFAAYAAAAHAAEAAAAFAAcAAAAHAAIAAAAFAAgAAAAFAAEAAAAFAAkAAAAFAAEAAAAFAAoAAAAFAAEAAAAFAAsAAAAFAAEAAAAFAAwAAAAFAAEAAAAFAA0AAAAFAAEAAAAFAA4AAAAFAAEAAAAFAA8AAAAFAAEAAAAFABAAAAAFAAEAAAAFABEAAAAFAAEAAAAFABIAAAAFAAIAAAAFABMAAAABAAQAAAAGAAMAAAAFAAEAAAAGAAQAAAAFAAEAAAAGAAUAAAAIAAAAAAAGAAYAAAAIAAEAAAAGAAcAAAAIAAIAAAAGAAgAAAAFAAEAAAAGAAkAAAAFAAEAAAAGAAoAAAAFAAEAAAAGAAsAAAAFAAMAAAAGAAwAAAAFAAEAAAAGAA0AAAAFAAEAAAAGAA4AAAAFAAEAAAAGAA8AAAAFAAEAAAAGABAAAAAFAAEAAAAGABEAAAAFAAEAAAAGABIAAAAFAAIAAAAGABMAAAABAAQAAAAHAAMAAAAFAAEAAAAHAAQAAAAFAAMAAAAHAAUAAAAJAAAAAAAHAAYAAAAJAAEAAAAHAAcAAAAJAAIAAAAHAAgAAAAFAAEAAAAHAAkAAAAFAAEAAAAHAAoAAAAFAAEAAAAHAAsAAAAFAAEAAAAHAAwAAAAEAAMAAAAHAA0AAAAFAAEAAAAHAA4AAAAFAAEAAAAHAA8AAAAFAAEAAAAHABAAAAAFAAEAAAAHABEAAAAFAAEAAAAHABIAAAAFAAIAAAAHABMAAAABAAQAAAAIAAMAAAAFAAEAAAAIAAQAAAAFAAEAAAAIAAUAAAAEAAMAAAAIAAYAAAAFAAEAAAAIAAcAAAAFAAEAAAAIAAgAAAAFAAEAAAAIAAkAAAAFAAEAAAAIAAoAAAAFAAEAAAAIAAsAAAAFAAEAAAAIAAwAAAAFAAEAAAAIAA0AAAAHAAAAAAAIAA4AAAAHAAEAAAAIAA8AAAAHAAIAAAAIABAAAAAFAAEAAAAIABEAAAAFAAEAAAAIABIAAAAFAAIAAAAIABMAAAABAAQAAAAJAAMAAAAFAAEAAAAJAAQAAAAFAAEAAAAJAAUAAAAFAAEAAAAJAAYAAAAFAAEAAAAJAAcAAAAFAAEAAAAJAAgAAAAFAAEAAAAJAAkAAAAFAAEAAAAJAAoAAAAFAAEAAAAJAAsAAAAFAAEAAAAJAAwAAAAFAAEAAAAJAA0AAAAIAAAAAAAJAA4AAAAIAAEAAAAJAA8AAAAIAAIAAAAJABAAAAAFAAEAAAAJABEAAAAFAAEAAAAJABIAAAAFAAIAAAAJABMAAAABAAQAAAAKAAMAAAAFAAEAAAAKAAQAAAAFAAEAAAAKAAUAAAAFAAEAAAAKAAYAAAAFAAEAAAAKAAcAAAAFAAMAAAAKAAgAAAAFAAEAAAAKAAkAAAAFAAEAAAAKAAoAAAAFAAEAAAAKAAsAAAAFAAEAAAAKAAwAAAAFAAEAAAAKAA0AAAAJAAAAAAAKAA4AAAAJAAEAAAAKAA8AAAAJAAIAAAAKABAAAAAFAAEAAAAKABEAAAAFAAEAAAAKABIAAAAFAAIAAAAKABMAAAABAAQAAAALAAMAAAAFAAEAAAALAAQAAAAFAAEAAAALAAUAAAAFAAEAAAALAAYAAAAFAAEAAAALAAcAAAAFAAEAAAALAAgAAAAHAAAAAAALAAkAAAAHAAEAAAALAAoAAAAHAAIAAAALAAsAAAAFAAEAAAALAAwAAAAFAAEAAAALAA0AAAAFAAEAAAALAA4AAAAFAAEAAAALAA8AAAAFAAEAAAALABAAAAAFAAEAAAALABEAAAAFAAEAAAALABIAAAAFAAIAAAALABMAAAAFAAEAAAALABQAAAAFAAEAAAAMAAMAAAAFAAEAAAAMAAQAAAAFAAEAAAAMAAUAAAAFAAEAAAAMAAYAAAAFAAEAAAAMAAcAAAAFAAEAAAAMAAgAAAAIAAAAAAAMAAkAAAAIAAEAAAAMAAoAAAAIAAIAAAAMAAsAAAAFAAEAAAAMAAwAAAAFAAEAAAAMAA0AAAAFAAEAAAAMAA4AAAAFAAEAAAAMAA8AAAAFAAEAAAAMABAAAAAFAAMAAAAMABEAAAAEAAMAAAAMABIAAAAFAAIAAAAMABMAAAAFAAEAAAAMABQAAAAFAAEAAAANAAMAAAAFAAMAAAANAAQAAAAFAAEAAAANAAUAAAAFAAEAAAANAAYAAAAFAAEAAAANAAcAAAAFAAEAAAANAAgAAAAJAAAAAAANAAkAAAAJAAEAAAANAAoAAAAJAAIAAAANAAsAAAAFAAEAAAANAAwAAAAFAAEAAAANAA0AAAAFAAEAAAANAA4AAAAFAAEAAAANAA8AAAAFAAEAAAANABAAAAAFAAEAAAANABEAAAAFAAEAAAANABIAAAAFAAIAAAANABMAAAAFAAEAAAANABQAAAAFAAEAAAAOAAMAAAAFAAEAAAAOAAQAAAAFAAEAAAAOAAUAAAAFAAEAAAAOAAYAAAAFAAEAAAAOAAcAAAAFAAEAAAAOAAgAAAAFAAEAAAAOAAkAAAAFAAEAAAAOAAoAAAAFAAEAAAAOAAsAAAAFAAEAAAAOAAwAAAAFAAEAAAAOAA0AAAAFAAEAAAAOAA4AAAAFAAEAAAAOAA8AAAAFAAEAAAAOABAAAAAFAAEAAAAOABEAAAAFAAEAAAAOABIAAAAFAAIAAAAOABMAAAAFAAEAAAAOABQAAAAFAAEAAAAPAAMAAAAFAAEAAAAPAAQAAAAFAAEAAAAPAAUAAAAFAAMAAAAPAAYAAAAFAAEAAAAPAAcAAAAFAAEAAAAPAAgAAAAFAAEAAAAPAAkAAAAFAAEAAAAPAAoAAAAFAAEAAAAPAAsAAAAFAAEAAAAPAAwAAAAFAAEAAAAPAA0AAAAFAAEAAAAPAA4AAAAFAAEAAAAPAA8AAAAFAAEAAAAPABAAAAAFAAEAAAAPABEAAAAFAAEAAAAPABIAAAAFAAIAAAAPABMAAAABAAQAAAAQAAMAAAAHAAEAAAAQAAQAAAAHAAIAAAAQAAUAAAAFAAEAAAAQAAYAAAAFAAEAAAAQAAcAAAAFAAEAAAAQAAgAAAAFAAEAAAAQAAkAAAAFAAEAAAAQAAoAAAAFAAEAAAAQAAsAAAAFAAEAAAAQAAwAAAAFAAEAAAAQAA0AAAAFAAEAAAAQAA4AAAAFAAEAAAAQAA8AAAAFAAEAAAAQABAAAAAFAAEAAAAQABEAAAAFAAEAAAAQABIAAAAFAAIAAAAQABMAAAABAAQAAAARAAMAAAAIAAEAAAARAAQAAAAIAAIAAAARAAUAAAAFAAEAAAARAAYAAAAFAAEAAAARAAcAAAAFAAEAAAARAAgAAAAFAAEAAAARAAkAAAAFAAEAAAARAAoAAAAFAAEAAAARAAsAAAAFAAMAAAARAAwAAAAFAAEAAAARAA0AAAAFAAEAAAARAA4AAAAFAAEAAAARAA8AAAAFAAEAAAARABAAAAAFAAEAAAARABEAAAAFAAEAAAARABIAAAAFAAIAAAARABMAAAABAAQAAAASAAMAAAAJAAEAAAASAAQAAAAJAAIAAAASAAUAAAAFAAEAAAASAAYAAAAFAAEAAAASAAcAAAAFAAEAAAASAAgAAAAFAAEAAAASAAkAAAAFAAEAAAASAAoAAAAFAAEAAAASAAsAAAAFAAEAAAASAAwAAAAFAAEAAAASAA0AAAAFAAEAAAASAA4AAAAFAAEAAAASAA8AAAAEAAMAAAASABAAAAAFAAEAAAASABEAAAAFAAEAAAASABIAAAAFAAIAAAASABMAAAABAAQAAAATAAMAAAAFAAEAAAATAAQAAAAFAAEAAAATAAUAAAAFAAEAAAATAAYAAAAFAAEAAAATAAcAAAAHAAAAAAATAAgAAAAEAAMAAAATAAkAAAAHAAIAAAATAAoAAAAFAAEAAAATAAsAAAAFAAEAAAATAAwAAAAEAAMAAAATAA0AAAAFAAEAAAATAA4AAAAHAAAAAAATAA8AAAAHAAEAAAATABAAAAAHAAIAAAATABEAAAAFAAEAAAATABIAAAAFAAIAAAATABMAAAABAAQAAAAUAAMAAAAFAAEAAAAUAAQAAAAFAAEAAAAUAAUAAAAFAAMAAAAUAAYAAAAFAAEAAAAUAAcAAAAIAAAAAAAUAAgAAAAIAAEAAAAUAAkAAAAIAAIAAAAUAAoAAAAFAAEAAAAUAAsAAAAFAAEAAAAUAAwAAAAFAAEAAAAUAA0AAAAFAAEAAAAUAA4AAAAIAAAAAAAUAA8AAAAIAAEAAAAUABAAAAAIAAIAAAAUABEAAAAFAAEAAAAUABIAAAAFAAIAAAAUABMAAAABAAQAAAAVAAMAAAAFAAEAAAAVAAQAAAAFAAEAAAAVAAUAAAAFAAEAAAAVAAYAAAAFAAEAAAAVAAcAAAAJAAAAAAAVAAgAAAAJAAEAAAAVAAkAAAAJAAIAAAAVAAoAAAAFAAEAAAAVAAsAAAAFAAEAAAAVAAwAAAAFAAEAAAAVAA0AAAAFAAMAAAAVAA4AAAAJAAAAAAAVAA8AAAAJAAEAAAAVABAAAAAJAAIAAAAVABEAAAAFAAEAAAAVABIAAAAFAAIAAAAVABMAAAABAAQAAAAWAAMAAAAFAAEAAAAWAAQAAAAFAAEAAAAWAAUAAAAFAAEAAAAWAAYAAAAFAAEAAAAWAAcAAAAFAAEAAAAWAAgAAAAFAAEAAAAWAAkAAAAFAAEAAAAWAAoAAAAFAAEAAAAWAAsAAAAFAAEAAAAWAAwAAAAFAAEAAAAWAA0AAAAFAAEAAAAWAA4AAAAFAAEAAAAWAA8AAAAFAAEAAAAWABAAAAAFAAEAAAAWABEAAAAFAAEAAAAWABIAAAAFAAIAAAAWABMAAAABAAQAAAAXAAMAAAAFAAEAAAAXAAQAAAAFAAEAAAAXAAUAAAAFAAEAAAAXAAYAAAAFAAEAAAAXAAcAAAAFAAEAAAAXAAgAAAAFAAEAAAAXAAkAAAAFAAEAAAAXAAoAAAAFAAEAAAAXAAsAAAAFAAEAAAAXAAwAAAAFAAEAAAAXAA0AAAAFAAEAAAAXAA4AAAAFAAEAAAAXAA8AAAAFAAEAAAAXABAAAAAFAAEAAAAXABEAAAAFAAEAAAAXABIAAAAFAAIAAAAXABMAAAABAAQAAAAYAAMAAAAFAAEAAAAYAAQAAAAFAAEAAAAYAAUAAAAFAAEAAAAYAAYAAAAFAAEAAAAYAAcAAAAFAAEAAAAYAAgAAAAFAAEAAAAYAAkAAAAFAAEAAAAYAAoAAAAFAAEAAAAYAAsAAAAFAAEAAAAYAAwAAAAFAAEAAAAYAA0AAAAFAAEAAAAYAA4AAAAFAAEAAAAYAA8AAAAFAAEAAAAYABAAAAAFAAEAAAAYABEAAAAFAAEAAAAYABIAAAAFAAIAAAAYABMAAAABAAQAAAAZAAMAAAAFAAEAAAAZAAQAAAAFAAEAAAAZAAUAAAAFAAEAAAAZAAYAAAAFAAEAAAAZAAcAAAAFAAEAAAAZAAgAAAAFAAEAAAAZAAkAAAAFAAEAAAAZAAoAAAAFAAEAAAAZAAsAAAAFAAEAAAAZAAwAAAAFAAEAAAAZAA0AAAAFAAEAAAAZAA4AAAAFAAEAAAAZAA8AAAAFAAEAAAAZABAAAAAFAAEAAAAZABEAAAAFAAEAAAAZABIAAAAFAAIAAAAZABMAAAABAAQAAAAaAAMAAAAFAAEAAAAaAAQAAAAFAAEAAAAaAAUAAAAFAAEAAAAaAAYAAAAFAAEAAAAaAAcAAAAFAAEAAAAaAAgAAAAFAAEAAAAaAAkAAAAFAAEAAAAaAAoAAAAFAAMAAAAaAAsAAAAFAAEAAAAaAAwAAAAFAAEAAAAaAA0AAAAFAAEAAAAaAA4AAAAFAAEAAAAaAA8AAAAFAAEAAAAaABAAAAAFAAEAAAAaABEAAAAFAAEAAAAaABIAAAAFAAIAAAAaABMAAAABAAQAAAAbAAMAAAAFAAEAAAAbAAQAAAAFAAEAAAAbAAUAAAAFAAEAAAAbAAYAAAAFAAEAAAAbAAcAAAAFAAEAAAAbAAgAAAAFAAEAAAAbAAkAAAAFAAEAAAAbAAoAAAAFAAEAAAAbAAsAAAAFAAEAAAAbAAwAAAAEAAMAAAAbAA0AAAAFAAEAAAAbAA4AAAAFAAEAAAAbAA8AAAAFAAEAAAAbABAAAAAEAAMAAAAbABEAAAAFAAEAAAAbABIAAAAFAAIAAAAbABMAAAABAAQAAAAcAAMAAAAFAAEAAAAcAAQAAAAFAAEAAAAcAAUAAAAFAAEAAAAcAAYAAAAFAAEAAAAcAAcAAAAFAAEAAAAcAAgAAAAFAAEAAAAcAAkAAAAFAAEAAAAcAAoAAAAFAAEAAAAcAAsAAAAHAAAAAAAcAAwAAAAHAAEAAAAcAA0AAAAHAAIAAAAcAA4AAAAFAAEAAAAcAA8AAAAFAAMAAAAcABAAAAAEAAMAAAAcABEAAAAHAAIAAAAcABIAAAAFAAIAAAAcABMAAAABAAQAAAAdAAMAAAAHAAAAAAAdAAQAAAAHAAEAAAAdAAUAAAAHAAIAAAAdAAYAAAAFAAEAAAAdAAcAAAAFAAEAAAAdAAgAAAAFAAEAAAAdAAkAAAAFAAEAAAAdAAoAAAAFAAEAAAAdAAsAAAAIAAAAAAAdAAwAAAAIAAEAAAAdAA0AAAAIAAIAAAAdAA4AAAAFAAEAAAAdAA8AAAAIAAAAAAAdABAAAAAIAAEAAAAdABEAAAAIAAIAAAAdABIAAAAFAAIAAAAdABMAAAABAAQAAAAeAAMAAAAIAAAAAAAeAAQAAAAIAAEAAAAeAAUAAAAIAAIAAAAeAAYAAAAFAAEAAAAeAAcAAAAFAAEAAAAeAAgAAAAFAAEAAAAeAAkAAAAFAAEAAAAeAAoAAAAFAAEAAAAeAAsAAAAJAAAAAAAeAAwAAAAJAAEAAAAeAA0AAAAJAAIAAAAeAA4AAAAFAAEAAAAeAA8AAAAJAAAAAAAeABAAAAAJAAEAAAAeABEAAAAJAAIAAAAeABIAAAAFAAIAAAAeABMAAAABAAQAAAAfAAMAAAAJAAAAAAAfAAQAAAAJAAEAAAAfAAUAAAAJAAIAAAAfAAYAAAAFAAEAAAAfAAcAAAAFAAEAAAAfAAgAAAAFAAEAAAAfAAkAAAAFAAEAAAAfAAoAAAAFAAEAAAAfAAsAAAAFAAEAAAAfAAwAAAAFAAEAAAAfAA0AAAAFAAEAAAAfAA4AAAAFAAEAAAAfAA8AAAAFAAEAAAAfABAAAAAFAAEAAAAfABEAAAAFAAEAAAAfABIAAAAFAAIAAAAfABMAAAABAAQAAAAgAAMAAAAFAAMAAAAgAAQAAAAFAAEAAAAgAAUAAAAFAAEAAAAgAAYAAAAFAAEAAAAgAAcAAAAEAAMAAAAgAAgAAAAFAAEAAAAgAAkAAAAFAAEAAAAgAAoAAAAFAAEAAAAgAAsAAAAFAAEAAAAgAAwAAAAFAAEAAAAgAA0AAAAFAAEAAAAgAA4AAAAFAAMAAAAgAA8AAAAFAAEAAAAgABAAAAAEAAMAAAAgABEAAAAFAAEAAAAgABIAAAAFAAIAAAAgABMAAAABAAQAAAAhAAMAAAAIAAMAAAAhAAQAAAAFAAEAAAAhAAUAAAAFAAMAAAAhAAYAAAAFAAEAAAAhAAcAAAAFAAEAAAAhAAgAAAAFAAEAAAAhAAkAAAAFAAEAAAAhAAoAAAAFAAEAAAAhAAsAAAAFAAEAAAAhAAwAAAAFAAEAAAAhAA0AAAAFAAEAAAAhAA4AAAAFAAEAAAAhAA8AAAAFAAEAAAAhABAAAAAFAAEAAAAhABEAAAAIAAMAAAAhABIAAAAFAAIAAAAhABMAAAABAAQAAAAiAAMAAAAFAAEAAAAiAAQAAAAFAAEAAAAiAAUAAAAFAAEAAAAiAAYAAAAFAAEAAAAiAAcAAAAFAAEAAAAiAAgAAAAFAAEAAAAiAAkAAAAFAAEAAAAiAAoAAAAFAAEAAAAiAAsAAAAFAAEAAAAiAAwAAAAFAAEAAAAiAA0AAAAFAAEAAAAiAA4AAAAFAAEAAAAiAA8AAAAFAAEAAAAiABAAAAAFAAEAAAAiABEAAAAFAAMAAAAiABIAAAAFAAIAAAAiABMAAAABAAQAAAAjAAMAAAAGAAEAAAAjAAQAAAAGAAEAAAAjAAUAAAAGAAEAAAAjAAYAAAAGAAEAAAAjAAcAAAAGAAEAAAAjAAgAAAAGAAEAAAAjAAkAAAAGAAEAAAAjAAoAAAAGAAEAAAAjAAsAAAAGAAEAAAAjAAwAAAAGAAEAAAAjAA0AAAAGAAEAAAAjAA4AAAAGAAEAAAAjAA8AAAAGAAEAAAAjABAAAAAGAAEAAAAjABEAAAAGAAEAAAAjABIAAAAGAAIAAAAjABMAAAABAAQAAAAkAAMAAAADAAUAAAAkAAQAAAADAAUAAAAkAAUAAAADAAUAAAAkAAYAAAADAAUAAAAkAAcAAAADAAUAAAAkAAgAAAADAAUAAAAkAAkAAAADAAUAAAAkAAoAAAADAAUAAAAkAAsAAAADAAUAAAAkAAwAAAADAAUAAAAkAA0AAAADAAUAAAAkAA4AAAADAAUAAAAkAA8AAAADAAUAAAAkABAAAAADAAUAAAAkABEAAAADAAUAAAAkABIAAAADAAUAAAAkABMAAAACAAQAAAAAAAAAAAAAAAMAAAAAAAEAAAAEAAUAAAAAAAIAAAAEAAUAAAAAAAMAAAAEAAUAAAAAAAQAAAAEAAUAAAAAAAUAAAAEAAUAAAAAAAYAAAAEAAUAAAAAAAcAAAAEAAUAAAAAAAgAAAAEAAUAAAAAAAkAAAAEAAUAAAAAAAoAAAAEAAUAAAAAAAsAAAAEAAUAAAAAAAwAAAAEAAUAAAAAAA0AAAAEAAUAAAAAAA4AAAAEAAUAAAAAAA8AAAAEAAUAAAAAABAAAAAEAAUAAAAAABEAAAAEAAUAAAAAABIAAAAEAAUAAAAAABMAAAAAAAQAAAABAAAAAAABAAMAAAABAAEAAAAEAAAAAAABAAIAAAAEAAEAAAACAAAAAAABAAMAAAACAAEAAAAFAAAAAAACAAIAAAAFAAEAAAADAAAAAAABAAMAAAADAAEAAAAFAAAAAAADAAIAAAAFAAEAAAAEAAAAAAABAAMAAAAEAAEAAAAFAAAAAAAEAAIAAAAFAAEAAAAFAAAAAAABAAMAAAAFAAEAAAAFAAAAAAAFAAIAAAAFAAEAAAAGAAAAAAABAAMAAAAGAAEAAAAFAAAAAAAGAAIAAAAFAAEAAAAHAAAAAAABAAMAAAAHAAEAAAAFAAAAAAAHAAIAAAAFAAEAAAAIAAAAAAABAAMAAAAIAAEAAAAFAAAAAAAIAAIAAAAFAAEAAAAJAAAAAAABAAMAAAAJAAEAAAAFAAAAAAAJAAIAAAAFAAEAAAAKAAAAAAABAAMAAAAKAAEAAAAFAAAAAAAKAAIAAAAFAAEAAAALAAAAAAABAAMAAAALAAEAAAAFAAAAAAALAAIAAAAFAAEAAAAMAAAAAAABAAMAAAAMAAEAAAAFAAAAAAAMAAIAAAAFAAEAAAANAAAAAAABAAMAAAANAAEAAAAFAAAAAAANAAIAAAAFAAEAAAAOAAAAAAABAAMAAAAOAAEAAAAFAAAAAAAOAAIAAAAFAAEAAAAPAAAAAAABAAMAAAAPAAEAAAAFAAAAAAAPAAIAAAAEAAMAAAAQAAAAAAABAAMAAAAQAAEAAAAFAAAAAAAQAAIAAAAHAAAAAAARAAAAAAABAAMAAAARAAEAAAAFAAAAAAARAAIAAAAIAAAAAAASAAAAAAABAAMAAAASAAEAAAAFAAAAAAASAAIAAAAJAAAAAAATAAAAAAABAAMAAAATAAEAAAAFAAAAAAATAAIAAAAFAAEAAAAUAAAAAAABAAMAAAAUAAEAAAAFAAAAAAAUAAIAAAAFAAEAAAAVAAAAAAABAAMAAAAVAAEAAAAFAAAAAAAVAAIAAAAFAAEAAAAWAAAAAAABAAMAAAAWAAEAAAAFAAAAAAAWAAIAAAAFAAEAAAAXAAAAAAABAAMAAAAXAAEAAAAFAAAAAAAXAAIAAAAFAAEAAAAYAAAAAAABAAMAAAAYAAEAAAAFAAAAAAAYAAIAAAAFAAEAAAAZAAAAAAABAAMAAAAZAAEAAAAFAAAAAAAZAAIAAAAFAAEAAAAaAAAAAAABAAMAAAAaAAEAAAAFAAAAAAAaAAIAAAAFAAEAAAAbAAAAAAABAAMAAAAbAAEAAAAFAAAAAAAbAAIAAAAFAAEAAAAcAAAAAAABAAMAAAAcAAEAAAAFAAAAAAAcAAIAAAAEAAMAAAAdAAAAAAABAAMAAAAdAAEAAAAFAAAAAAAdAAIAAAAFAAEAAAAeAAAAAAABAAMAAAAeAAEAAAAFAAAAAAAeAAIAAAAFAAEAAAAfAAAAAAABAAMAAAAfAAEAAAAFAAAAAAAfAAIAAAAFAAEAAAAgAAAAAAABAAMAAAAgAAEAAAAFAAAAAAAgAAIAAAAFAAEAAAAhAAAAAAABAAMAAAAhAAEAAAAFAAAAAAAhAAIAAAAFAAEAAAAiAAAAAAABAAMAAAAiAAEAAAAFAAAAAAAiAAIAAAAFAAEAAAAjAAAAAAABAAMAAAAjAAEAAAAGAAAAAAAjAAIAAAAGAAEAAAAkAAAAAAACAAMAAAAkAAEAAAADAAUAAAAkAAIAAAADAAUAAAA=")
+tile_size = 22.0
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_llwue")]
+position = Vector2(240, 324)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_wxdnp")]
+position = Vector2(240, 383)
+level = "uid://bv5b7yw3o6pnb"
+target_transition_area = "LevelTransitionBoss"
+center_player = true
+size = 1
+
+[node name="colliders" type="Node2D" parent="."]
+position = Vector2(417, -32)
+
+[node name="collider" type="StaticBody2D" parent="colliders"]
+position = Vector2(-147, 372)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_1jbka")
+
+[node name="QuestActivatedSwitch" parent="." instance=ExtResource("9_lnihe")]
+visible = false
+linked_quest = ExtResource("8_makdq")
+settings_summary = "UPDATE QUEST:
+Quest: Победи босса
+Checking if player has quest"
+
+[node name="angry_student" type="Node2D" parent="QuestActivatedSwitch"]
+y_sort_enabled = true
+position = Vector2(112, -2)
+script = ExtResource("8_c5lho")
+max_hp = 1
+
+[node name="PersistentDataHandler" parent="QuestActivatedSwitch/angry_student" instance=ExtResource("9_t2drd")]
+
+[node name="BossNode" type="Node2D" parent="QuestActivatedSwitch/angry_student"]
+position = Vector2(257, 191)
+
+[node name="ShadowSprite" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/BossNode"]
+texture = SubResource("GradientTexture2D_pva20")
+
+[node name="CloakSprite" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/BossNode"]
+position = Vector2(0, -34)
+scale = Vector2(1.29357, 1.29357)
+texture = ExtResource("10_cqwae")
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="QuestActivatedSwitch/angry_student/BossNode/CloakSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_ij6gb")
+}
+autoplay = "down"
+
+[node name="PointLight2D" type="PointLight2D" parent="QuestActivatedSwitch/angry_student/BossNode"]
+energy = 0.75
+texture = SubResource("GradientTexture2D_hlp6j")
+
+[node name="HurtBox" parent="QuestActivatedSwitch/angry_student/BossNode" instance=ExtResource("11_llwue")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActivatedSwitch/angry_student/BossNode/HurtBox"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_0ihji")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="HitBox" parent="QuestActivatedSwitch/angry_student/BossNode" instance=ExtResource("12_wxdnp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestActivatedSwitch/angry_student/BossNode/HitBox"]
+position = Vector2(0, -23)
+shape = SubResource("CircleShape2D_drbbp")
+debug_color = Color(1, 0.973, 0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="QuestActivatedSwitch/angry_student/BossNode"]
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="QuestActivatedSwitch/angry_student/BossNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_ar58h")
+}
+autoplay = "idle"
+
+[node name="AnimationPlayer_Damaged" type="AnimationPlayer" parent="QuestActivatedSwitch/angry_student/BossNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_6s46g")
+}
+autoplay = "default"
+
+[node name="BeamAttacks" type="Node2D" parent="QuestActivatedSwitch/angry_student"]
+
+[node name="EB_H1" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 116)
+
+[node name="EB_H2" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 191)
+
+[node name="EB_H3" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 262)
+
+[node name="EB_V1" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(157, 191)
+rotation = 1.5708
+
+[node name="EB_V2" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 191)
+rotation = 1.5708
+
+[node name="EB_V3" parent="QuestActivatedSwitch/angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(357, 191)
+rotation = 1.5708
+
+[node name="PositionTargets" type="Node2D" parent="QuestActivatedSwitch/angry_student"]
+
+[node name="Sprite2D" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/PositionTargets"]
+position = Vector2(256, 115)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D4" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/PositionTargets"]
+position = Vector2(395, 192)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/PositionTargets"]
+position = Vector2(256, 265)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D3" type="Sprite2D" parent="QuestActivatedSwitch/angry_student/PositionTargets"]
+position = Vector2(115, 192)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="ItemDropper" parent="QuestActivatedSwitch/angry_student" instance=ExtResource("15_lnihe")]
+position = Vector2(314, 192)
+item_data = ExtResource("12_iub4c")
+
+[node name="QuestAdvanceTrigger" parent="QuestActivatedSwitch/angry_student/ItemDropper" instance=ExtResource("16_xeeba")]
+position = Vector2(-399, -163)
+signal_name = "drop_collected"
+linked_quest = ExtResource("8_makdq")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вернуть кольцо
+Step: 1 - убей злого студента
+Complete: false"
+
+[node name="angry_student" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(102, -16)
+script = ExtResource("8_c5lho")
+max_hp = 6
+
+[node name="PersistentDataHandler" parent="angry_student" instance=ExtResource("9_t2drd")]
+
+[node name="BossNode" type="Node2D" parent="angry_student"]
+position = Vector2(257, 191)
+
+[node name="ShadowSprite" type="Sprite2D" parent="angry_student/BossNode"]
+texture = SubResource("GradientTexture2D_pva20")
+
+[node name="CloakSprite" type="Sprite2D" parent="angry_student/BossNode"]
+position = Vector2(0, -34)
+scale = Vector2(1.29357, 1.29357)
+texture = ExtResource("10_cqwae")
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="angry_student/BossNode/CloakSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_ij6gb")
+}
+autoplay = "down"
+
+[node name="PointLight2D" type="PointLight2D" parent="angry_student/BossNode"]
+energy = 0.75
+texture = SubResource("GradientTexture2D_hlp6j")
+
+[node name="HurtBox" parent="angry_student/BossNode" instance=ExtResource("11_llwue")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="angry_student/BossNode/HurtBox"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_0ihji")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="HitBox" parent="angry_student/BossNode" instance=ExtResource("12_wxdnp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="angry_student/BossNode/HitBox"]
+position = Vector2(0, -23)
+shape = SubResource("CircleShape2D_drbbp")
+debug_color = Color(1, 0.973, 0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="angry_student/BossNode"]
+volume_db = -30.0
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="angry_student/BossNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_ar58h")
+}
+autoplay = "idle"
+
+[node name="AnimationPlayer_Damaged" type="AnimationPlayer" parent="angry_student/BossNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_6s46g")
+}
+autoplay = "default"
+
+[node name="BeamAttacks" type="Node2D" parent="angry_student"]
+
+[node name="EB_H1" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 116)
+
+[node name="EB_H2" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 191)
+
+[node name="EB_H3" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 262)
+
+[node name="EB_V1" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(157, 191)
+rotation = 1.5708
+
+[node name="EB_V2" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(257, 191)
+rotation = 1.5708
+
+[node name="EB_V3" parent="angry_student/BeamAttacks" instance=ExtResource("14_7wk0y")]
+position = Vector2(357, 191)
+rotation = 1.5708
+
+[node name="PositionTargets" type="Node2D" parent="angry_student"]
+
+[node name="Sprite2D" type="Sprite2D" parent="angry_student/PositionTargets"]
+position = Vector2(256, 115)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D4" type="Sprite2D" parent="angry_student/PositionTargets"]
+position = Vector2(395, 192)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="angry_student/PositionTargets"]
+position = Vector2(256, 265)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="Sprite2D3" type="Sprite2D" parent="angry_student/PositionTargets"]
+position = Vector2(115, 192)
+texture = SubResource("GradientTexture2D_t4x5j")
+
+[node name="ItemDropper" parent="angry_student" instance=ExtResource("15_lnihe")]
+position = Vector2(314, 192)
+item_data = ExtResource("12_iub4c")
+
+[node name="QuestAdvanceTrigger" parent="angry_student/ItemDropper" instance=ExtResource("16_xeeba")]
+position = Vector2(-399, -163)
+signal_name = "drop_collected"
+linked_quest = ExtResource("8_makdq")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вернуть кольцо
+Step: 1 - убей злого студента
+Complete: false"

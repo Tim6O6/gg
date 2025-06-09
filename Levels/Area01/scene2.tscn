@@ -1,0 +1,156 @@
+[gd_scene load_steps=18 format=4 uid="uid://b3eupcse8up0l"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_vil1w"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_cg4kw"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_yc55m"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_bwift"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="5_vojwh"]
+[ext_resource type="Texture2D" uid="uid://72ubdwbkvrwg" path="res://assets/1 корпус ЛТУ цвет новое.png" id="7_yc55m"]
+[ext_resource type="Texture2D" uid="uid://df0un0hw346bg" path="res://assets/trophy.png" id="8_bwift"]
+[ext_resource type="Resource" uid="uid://d3nlftmjbd8db" path="res://quests/remove_flora.tres" id="9_g325n"]
+[ext_resource type="Script" uid="uid://bqyjd4eb4lb2l" path="res://Levels/Area01/scene2_quest.gd" id="10_w0gr1"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="11_25ike"]
+[ext_resource type="PackedScene" uid="uid://d4igjv570x7c4" path="res://Props/Plants/plant.tscn" id="11_wvn2b"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="13_5e2lv"]
+[ext_resource type="PackedScene" uid="uid://b7x3cvq6i0qvf" path="res://Enemies/Slime/slime.tscn" id="13_w0gr1"]
+[ext_resource type="PackedScene" uid="uid://bwppesqootpqu" path="res://Enemies/Slime/slime2.tscn" id="14_wvn2b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwift"]
+size = Vector2(210, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vojwh"]
+size = Vector2(834, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffhhm"]
+size = Vector2(36, 426)
+
+[node name="scene2" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_vil1w")
+music = ExtResource("2_cg4kw")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_yc55m")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAAAAIAAQAIAAYAAAAAAAMAAQAJAAYAAAAAAAQAAQAGAAYAAAAAAAUAAQAHAAcAAAAAAAYAAQAHAAcAAAAAAAcAAQAIAAcAAAAAAAgAAQAIAAYAAAABAAgAAQATAAMAAAACAAgAAQAUAAMAAAADAAgAAQAUAAMAAAAEAAgAAQAUAAMAAAAFAAgAAQAUAAMAAAAJAAgAAQAUAAMAAAAKAAgAAQAUAAMAAAALAAgAAQAUAAMAAAAMAAgAAQAUAAMAAAANAAgAAQAUAAMAAAAOAAgAAQAUAAMAAAAOAAcAAQAUAAIAAAAOAAYAAQAUAAEAAAAOAAUAAQAJAAYAAAAOAAQAAQAGAAYAAAAOAAMAAQAGAAYAAAAOAAIAAQAGAAYAAAAOAAEAAQAJAAgAAAANAAcAAQAUAAIAAAAMAAcAAQAUAAIAAAALAAcAAQAUAAIAAAAKAAcAAQAUAAIAAAAJAAcAAQAUAAIAAAAFAAcAAQAUAAIAAAAEAAcAAQAUAAIAAAADAAcAAQAUAAIAAAACAAcAAQAUAAIAAAACAAYAAQAUAAIAAAABAAYAAQATAAIAAAABAAcAAQATAAIAAAADAAYAAQAUAAIAAAAEAAYAAQAUAAEAAAAFAAYAAQAUAAEAAAAJAAYAAQAUAAIAAAAKAAYAAQAUAAIAAAALAAYAAQAUAAEAAAANAAYAAQAUAAEAAAANAAUAAQAGAAYAAAAKAAUAAQAUAAIAAAAJAAUAAQAUAAIAAAAFAAUAAQAHAAcAAAAEAAUAAQAGAAYAAAADAAUAAQAVAAIAAAACAAUAAQAUAAIAAAABAAUAAQATAAIAAAABAAQAAQATAAIAAAACAAQAAQAUAAIAAAAEAAQAAQAGAAYAAAAFAAQAAQAJAAgAAAAFAAMAAQAIAAgAAAAEAAMAAQAHAAcAAAABAAMAAQATAAIAAAABAAIAAQATAAIAAAAEAAIAAQAGAAYAAAAFAAIAAQAGAAYAAAAJAAIAAQAHAAgAAAADAAIAAQAVAAIAAAACAAIAAQAUAAIAAAAJAAEAAQAJAAYAAAAKAAEAAQAGAAYAAAALAAEAAQAJAAgAAAAMAAEAAQAGAAYAAAANAAEAAQAGAAYAAAAEAAEAAQAIAAYAAAADAAEAAQAVAAIAAAAAAAEAAQAGAAYAAAACAAEAAQAUAAIAAAABAAEAAQATAAIAAAAFAAEAAQAIAAYAAAAAAAkAAQAGAAYAAAABAAkAAQAGAAYAAAACAAkAAQAGAAYAAAADAAkAAQAGAAYAAAAEAAkAAQAGAAYAAAAFAAkAAQAGAAYAAAAJAAkAAQAIAAgAAAAKAAkAAQAGAAYAAAALAAkAAQAGAAYAAAAMAAkAAQAIAAYAAAANAAkAAQAIAAgAAAAOAAkAAQAGAAYAAAADAAMAAQAVAAIAAAACAAMAAQAUAAIAAAADAAQAAQAVAAIAAAAAAAoAAQAJAAYAAAABAAoAAQAIAAcAAAACAAoAAQAGAAYAAAADAAoAAQAJAAcAAAAEAAoAAQAGAAYAAAAFAAoAAQAGAAYAAAAJAAoAAQAIAAcAAAAKAAoAAQAGAAYAAAALAAoAAQAGAAYAAAAMAAoAAQAHAAcAAAANAAoAAQAHAAYAAAAOAAoAAQAGAAYAAAAJAAQAAQAUAAIAAAAKAAIAAQAGAAYAAAAKAAQAAQAUAAIAAAALAAIAAQAHAAgAAAALAAMAAQAGAAYAAAALAAQAAQAHAAYAAAALAAUAAQAGAAYAAAAMAAIAAQAGAAYAAAAMAAMAAQAGAAYAAAAMAAQAAQAJAAcAAAAMAAUAAQAGAAYAAAANAAIAAQAGAAYAAAANAAMAAQAHAAcAAAANAAQAAQAGAAYAAAAAAAAAAQAGAAYAAAABAAAAAQATAAIAAAACAAAAAQAUAAIAAAADAAAAAQAVAAIAAAAEAAAAAQAGAAYAAAAFAAAAAQAHAAgAAAAJAAAAAQAGAAYAAAAKAAAAAQAGAAYAAAALAAAAAQAGAAYAAAAMAAAAAQAGAAYAAAANAAAAAQAIAAYAAAAOAAAAAQAIAAYAAAAKAAMAAQAGAAYAAAAJAAMAAQAJAAYAAAAGAAAAAQAGAAYAAAAGAAEAAQAGAAYAAAAGAAIAAQAGAAYAAAAHAAIAAQAJAAcAAAAHAAMAAQAJAAgAAAAHAAQAAQAHAAYAAAAHAAUAAQAGAAYAAAAHAAYAAQAUAAEAAAAIAAYAAQAUAAEAAAAIAAcAAQAUAAIAAAAIAAgAAQAUAAMAAAAIAAkAAQAGAAYAAAAGAAMAAQAGAAYAAAAGAAQAAQAHAAYAAAAGAAUAAQAGAAYAAAAGAAYAAQAUAAEAAAAGAAcAAQAUAAIAAAAGAAgAAQAUAAMAAAAGAAkAAQAGAAYAAAAGAAoAAQAGAAYAAAAHAAEAAQAGAAYAAAAHAAcAAQAUAAIAAAAHAAgAAQAUAAMAAAAHAAkAAQAGAAYAAAAHAAoAAQAGAAYAAAAIAAEAAQAIAAcAAAAIAAIAAQAIAAYAAAAIAAMAAQAHAAgAAAAIAAQAAQAGAAYAAAAIAAUAAQAJAAcAAAAIAAoAAQAHAAcAAAAHAAAAAQAIAAgAAAAIAAAAAQAJAAYAAAAPAAcAAQAUAAIAAAAQAAcAAQAUAAIAAAARAAcAAQAUAAIAAAARAAgAAQAUAAIAAAARAAkAAQAUAAIAAAARAAoAAQAUAAIAAAARAAsAAQAUAAIAAAARAAwAAQAUAAIAAAASAAwAAQAVAAIAAAASAAsAAQAVAAIAAAASAAoAAQAVAAIAAAASAAkAAQAVAAIAAAASAAgAAQAVAAIAAAASAAYAAQAVAAEAAAARAAYAAQAUAAEAAAAQAAYAAQAUAAEAAAAPAAYAAQAUAAEAAAASAAcAAQAVAAIAAAAQAAwAAQATAAIAAAAQAAsAAQATAAIAAAAQAAoAAQATAAIAAAAQAAkAAQATAAIAAAAQAAgAAQAUAAIAAAAPAAgAAQAUAAMAAAAAAAsAAQAGAAYAAAAAAAwAAQAHAAgAAAABAAsAAQAGAAYAAAABAAwAAQAGAAYAAAACAAsAAQAGAAYAAAACAAwAAQAGAAYAAAADAAsAAQAGAAYAAAADAAwAAQAJAAYAAAAEAAsAAQAGAAYAAAAEAAwAAQAGAAYAAAAFAAsAAQAGAAYAAAAFAAwAAQAJAAcAAAAGAAsAAQAJAAgAAAAGAAwAAQAGAAYAAAAHAAsAAQAGAAYAAAAHAAwAAQAIAAYAAAAIAAsAAQAGAAYAAAAIAAwAAQAGAAYAAAAJAAsAAQAGAAYAAAAJAAwAAQAGAAYAAAAKAAsAAQAGAAYAAAAKAAwAAQAIAAgAAAALAAsAAQAGAAYAAAALAAwAAQAJAAcAAAAMAAsAAQAIAAYAAAAMAAwAAQAHAAgAAAANAAsAAQAGAAYAAAANAAwAAQAGAAYAAAAOAAsAAQAGAAYAAAAOAAwAAQAJAAgAAAAPAAsAAQAGAAYAAAAPAAwAAQAGAAYAAAAPAAkAAQAGAAYAAAAPAAoAAQAGAAYAAAAPAAAAAQAGAAYAAAAPAAEAAQAGAAYAAAAPAAIAAQAIAAYAAAAPAAMAAQAHAAcAAAAPAAQAAQAGAAYAAAAPAAUAAQAGAAYAAAAQAAAAAQAGAAYAAAAQAAEAAQAGAAYAAAAQAAIAAQAGAAYAAAAQAAMAAQAGAAYAAAAQAAQAAQAJAAgAAAAQAAUAAQAIAAcAAAARAAAAAQAGAAYAAAARAAEAAQAGAAYAAAARAAIAAQAGAAYAAAARAAMAAQAJAAYAAAARAAQAAQAIAAYAAAARAAUAAQAIAAgAAAASAAAAAQAGAAYAAAASAAEAAQAGAAYAAAASAAIAAQAJAAcAAAASAAMAAQAGAAYAAAASAAQAAQAGAAYAAAASAAUAAQAGAAYAAAATAAAAAQAHAAgAAAATAAEAAQAGAAYAAAATAAIAAQAGAAYAAAATAAMAAQAJAAYAAAATAAQAAQAGAAYAAAATAAUAAQAJAAYAAAATAAYAAQAGAAYAAAATAAcAAQAHAAgAAAATAAgAAQAJAAYAAAATAAkAAQAGAAYAAAATAAoAAQAGAAYAAAATAAsAAQAGAAYAAAATAAwAAQAHAAcAAAAUAAAAAQAHAAcAAAAUAAEAAQAGAAYAAAAUAAIAAQAGAAYAAAAUAAMAAQAGAAYAAAAUAAQAAQAGAAYAAAAUAAUAAQAGAAYAAAAUAAYAAQAHAAYAAAAUAAcAAQAGAAYAAAAUAAgAAQAGAAYAAAAUAAkAAQAJAAcAAAAUAAoAAQAGAAYAAAAUAAsAAQAGAAYAAAAUAAwAAQAGAAYAAAAVAAAAAQAIAAYAAAAVAAEAAQAGAAYAAAAVAAIAAQAJAAcAAAAVAAMAAQAGAAYAAAAVAAQAAQAJAAYAAAAVAAUAAQAHAAYAAAAVAAYAAQAJAAgAAAAVAAcAAQAGAAYAAAAVAAgAAQAGAAYAAAAVAAkAAQAGAAYAAAAVAAoAAQAGAAYAAAAVAAsAAQAGAAYAAAAVAAwAAQAHAAgAAAD+/wAAAQAHAAcAAAD+/wEAAQAHAAYAAAD+/wIAAQAGAAYAAAD+/wMAAQAIAAgAAAD+/wQAAQAJAAgAAAD+/wUAAQAGAAYAAAD+/wYAAQAGAAYAAAD+/wcAAQAIAAgAAAD+/wgAAQAGAAYAAAD+/wkAAQAGAAYAAAD+/woAAQAGAAYAAAD+/wsAAQAGAAYAAAD+/wwAAQAIAAYAAAD//wAAAQAGAAYAAAD//wEAAQAHAAcAAAD//wIAAQAGAAYAAAD//wMAAQAGAAYAAAD//wQAAQAGAAYAAAD//wUAAQAGAAYAAAD//wYAAQAGAAYAAAD//wcAAQAHAAcAAAD//wgAAQAGAAYAAAD//wkAAQAGAAYAAAD//woAAQAJAAcAAAD//wsAAQAGAAYAAAD//wwAAQAJAAYAAAAMAAYAAQAUAAEAAAA=")
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_yc55m")]
+z_index = -1
+tile_map_data = PackedByteArray("AAALAAAAAQAHAAQAAAANAAsAAQAMAAUAAAANAAwAAQAMAAYAAAAOAAsAAQAQAAUAAAAOAAwAAQAQAAYAAAAHAAkAAQAFAAEAAAATAAEAAQAFAAEAAAD//wIAAQAFAAEAAAAAAAoAAQABAAAAAAAUAAYAAQABAAAAAAAPAAMAAQABAAAAAAD//wYAAQAAAAAAAAAMAAsAAQAAAAAAAAATAAQAAQACAAAAAAAGAAoAAQACAAAAAAAFAAMAAQADAAAAAAADAAsAAQADAAAAAAAVAAkAAQADAAAAAAAHAAUAAQAIAAIAAAADAAkAAQAIAAIAAAAJAAsAAQAIAAIAAAD//wMAAQAIAAIAAAAPAAEAAQAIAAIAAAASAAIAAQAIAAIAAAATAAgAAQAIAAIAAAAVAAMAAQAIAAIAAAAUAAsAAQAIAAIAAAADAAYAAQASAAQAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_bwift")]
+position = Vector2(558, 349)
+
+[node name="LevelTransition" parent="." instance=ExtResource("5_vojwh")]
+position = Vector2(564, 396)
+level = "uid://7x5jl2t7kah4"
+center_player = true
+size = 3
+side = 3
+
+[node name="LevelTransitionCorpus" parent="." instance=ExtResource("5_vojwh")]
+position = Vector2(318, 178)
+level = "uid://b5n083hkloju6"
+center_player = true
+side = 2
+
+[node name="LevelTransitionNext" parent="." instance=ExtResource("5_vojwh")]
+position = Vector2(80, 18)
+level = "uid://btaitoxju13l3"
+center_player = true
+side = 2
+
+[node name="corpus" type="StaticBody2D" parent="."]
+position = Vector2(318, 72)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="corpus"]
+texture = ExtResource("7_yc55m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="corpus"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_bwift")
+
+[node name="trophy" type="Sprite2D" parent="."]
+self_modulate = Color(0.778909, 0.778909, 0.778909, 1)
+z_index = 2
+position = Vector2(448, 323)
+scale = Vector2(0.143029, 0.143029)
+texture = ExtResource("8_bwift")
+
+[node name="colliders" type="Node2D" parent="."]
+
+[node name="collider" type="StaticBody2D" parent="colliders"]
+position = Vector2(319, 434)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider"]
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider2" type="StaticBody2D" parent="colliders"]
+position = Vector2(322, -18)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider2"]
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider3" type="StaticBody2D" parent="colliders"]
+position = Vector2(-79, 205)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider3"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="collider4" type="StaticBody2D" parent="colliders"]
+position = Vector2(721, 211)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider4"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="QuestActivatedSwitch" parent="." instance=ExtResource("11_25ike")]
+position = Vector2(721, 211)
+linked_quest = ExtResource("9_g325n")
+settings_summary = "UPDATE QUEST:
+Quest: Постричь растения
+Checking if player has quest"
+
+[node name="quest_handler" type="Node2D" parent="QuestActivatedSwitch"]
+position = Vector2(-721, -211)
+script = ExtResource("10_w0gr1")
+
+[node name="plants" type="Node2D" parent="QuestActivatedSwitch/quest_handler"]
+
+[node name="Plant" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_wvn2b")]
+position = Vector2(547, 145)
+
+[node name="Plant2" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_wvn2b")]
+position = Vector2(476, 46)
+
+[node name="Plant3" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_wvn2b")]
+position = Vector2(313, 373)
+
+[node name="Plant4" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_wvn2b")]
+position = Vector2(152, 172)
+
+[node name="QuestAdvanceTrigger" parent="QuestActivatedSwitch/quest_handler" instance=ExtResource("13_5e2lv")]
+linked_quest = ExtResource("9_g325n")
+quest_step = 1
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Постричь растения
+Step: 1 - постриги растения
+Complete: true"
+
+[node name="orange_squirrel" parent="." instance=ExtResource("13_w0gr1")]
+position = Vector2(484, 168)
+
+[node name="orange_squirrel3" parent="." instance=ExtResource("13_w0gr1")]
+position = Vector2(22, 121)
+
+[node name="watermelon_hedgedog" parent="." instance=ExtResource("14_wvn2b")]
+position = Vector2(148, 406)

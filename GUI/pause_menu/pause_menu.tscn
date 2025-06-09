@@ -1,0 +1,548 @@
+[gd_scene load_steps=31 format=3 uid="uid://bywqqrmmqtcpk"]
+
+[ext_resource type="Script" uid="uid://ia628h6yaojv" path="res://GUI/pause_menu/pause_menu.gd" id="1_uh5g0"]
+[ext_resource type="Script" uid="uid://bqs43ft0fecar" path="res://GUI/pause_menu/inventory.gd" id="2_00kwt"]
+[ext_resource type="Texture2D" uid="uid://bmjan6873e3h5" path="res://Items/sprites/items.png" id="2_6f15s"]
+[ext_resource type="FontFile" uid="uid://cnrqk38ddqqwy" path="res://GUI/fonts/m5x7.ttf" id="2_bhofp"]
+[ext_resource type="Script" uid="uid://b34ukmw1e7pax" path="res://GUI/pause_menu/inventory/scripts/inventory_ui.gd" id="3_kwke8"]
+[ext_resource type="PackedScene" uid="uid://dndwapovgam4d" path="res://GUI/pause_menu/inventory/inventory_slot.tscn" id="3_x4v76"]
+[ext_resource type="Resource" uid="uid://djd6vwckdo4ya" path="res://GUI/pause_menu/inventory/player_inventory.tres" id="4_cwt50"]
+[ext_resource type="Texture2D" uid="uid://d2b30nmoynyc2" path="res://Items/sprites/gear.png" id="6_dcvp3"]
+[ext_resource type="PackedScene" uid="uid://dunuubhkvov76" path="res://GUI/pause_menu/stats/stats.tscn" id="6_y6avm"]
+[ext_resource type="Script" uid="uid://v8exnhqk3spq" path="res://GUI/pause_menu/quests_ui.gd" id="7_hbgqu"]
+[ext_resource type="FontFile" uid="uid://o7gqnagfnby2" path="res://GUI/fonts/Abaddon Bold.ttf" id="9_3wg7w"]
+[ext_resource type="Texture2D" uid="uid://w47xc77t70yd" path="res://assets/quests/Журнал заданий пустой.png" id="10_ak53x"]
+[ext_resource type="Texture2D" uid="uid://bc6xvi0o2pafu" path="res://assets/quests/description.png" id="11_00kwt"]
+[ext_resource type="Texture2D" uid="uid://bl88i4tylbjqd" path="res://GUI/pause_menu/quests/checkbox.png" id="13_ak53x"]
+[ext_resource type="Texture2D" uid="uid://ia7e18ljiou3" path="res://GUI/player_hud/Игровые настройки с текстом.png" id="13_fgl3m"]
+[ext_resource type="Texture2D" uid="uid://dy8krdqrsw0se" path="res://GUI/player_hud/Активная_и_неактивная_кнопки_Игровые_настройки.png" id="14_ak53x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3762"]
+atlas = ExtResource("2_6f15s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3jqj"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_u3762")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mwyn"]
+atlas = ExtResource("6_dcvp3")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cvrss"]
+load_path = "res://.godot/imported/gear.png-05ec228c6bd652f530ec253f570f43fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwvth"]
+atlas = SubResource("CompressedTexture2D_cvrss")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fgl3m"]
+load_path = "res://.godot/imported/gear.png-05ec228c6bd652f530ec253f570f43fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi0tn"]
+atlas = SubResource("CompressedTexture2D_fgl3m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ak53x"]
+load_path = "res://.godot/imported/gear.png-05ec228c6bd652f530ec253f570f43fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug6r6"]
+atlas = SubResource("CompressedTexture2D_ak53x")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oddi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak53x"]
+bg_color = Color(0.788235, 0.784314, 0.643137, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syaa3"]
+bg_color = Color(0.0217078, 0.0217078, 0.0217078, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0286"]
+bg_color = Color(0.0217078, 0.0217078, 0.0217078, 1)
+draw_center = false
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ak53x"]
+resource_name = "quests_group"
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_uh5g0")
+metadata/_edit_horizontal_guides_ = [66.0, 226.0]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 0.831373)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
+max_polyphony = 4
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 1
+
+[node name="Инвентарь" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("2_00kwt")
+metadata/_tab_index = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Инвентарь"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 27.0
+offset_right = 228.0
+offset_bottom = 187.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_d3jqj")
+
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/Инвентарь/PanelContainer"]
+layout_mode = 2
+columns = 5
+script = ExtResource("3_kwke8")
+data = ExtResource("4_cwt50")
+
+[node name="InventorySlot" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot13" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot14" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot15" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot16" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot17" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot18" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot19" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="InventorySlot20" parent="Control/TabContainer/Инвентарь/PanelContainer/GridContainer" instance=ExtResource("3_x4v76")]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/TabContainer/Инвентарь"]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 99.0
+offset_right = 450.0
+offset_bottom = 187.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_d3jqj")
+
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/Инвентарь/PanelContainer2"]
+layout_mode = 2
+columns = 5
+
+[node name="TextureRect" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2mwyn")
+stretch_mode = 3
+
+[node name="InventorySlot_Armor" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer" instance=ExtResource("3_x4v76")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_gwvth")
+stretch_mode = 3
+
+[node name="InventorySlot_Amulet" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer" instance=ExtResource("3_x4v76")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fi0tn")
+stretch_mode = 3
+
+[node name="InventorySlot_Weapon" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer" instance=ExtResource("3_x4v76")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="TextureRect6" type="TextureRect" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_ug6r6")
+stretch_mode = 3
+
+[node name="InventorySlot_Ring" parent="Control/TabContainer/Инвентарь/PanelContainer2/GridContainer" instance=ExtResource("3_x4v76")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Stats" parent="Control/TabContainer/Инвентарь" instance=ExtResource("6_y6avm")]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 27.0
+offset_right = 450.0
+offset_bottom = 86.0
+
+[node name="ItemDescription" type="Label" parent="Control/TabContainer/Инвентарь"]
+modulate = Color(1, 1, 1, 0.643137)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = 78.5
+offset_right = 211.0
+offset_bottom = 125.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_bhofp")
+text = "example description"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Задания" type="Control" parent="Control/TabContainer"]
+layout_mode = 2
+script = ExtResource("7_hbgqu")
+metadata/_tab_index = 1
+
+[node name="texture" type="TextureRect" parent="Control/TabContainer/Задания"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_ak53x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="hbox" type="HBoxContainer" parent="Control/TabContainer/Задания/texture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -72.5
+offset_right = 100.0
+offset_bottom = 92.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="quests_scroll" type="ScrollContainer" parent="Control/TabContainer/Задания/texture/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+follow_focus = true
+scroll_vertical_custom_step = 100.0
+horizontal_scroll_mode = 0
+
+[node name="quests_vbox" type="VBoxContainer" parent="Control/TabContainer/Задания/texture/hbox/quests_scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="_button_tmp" type="Button" parent="Control/TabContainer/Задания/texture/hbox/quests_scroll/quests_vbox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1oddi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ak53x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_syaa3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ak53x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_e0286")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_ak53x")
+
+[node name="title_label" type="Label" parent="Control/TabContainer/Задания/texture/hbox/quests_scroll/quests_vbox/_button_tmp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -12.0
+offset_right = 43.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bhofp")
+theme_override_font_sizes/font_size = 10
+text = "Название"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="step_label" type="Label" parent="Control/TabContainer/Задания/texture/hbox/quests_scroll/quests_vbox/_button_tmp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -3.5
+offset_right = 91.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.268621, 0.268621, 0.268621, 1)
+theme_override_fonts/font = ExtResource("2_bhofp")
+theme_override_font_sizes/font_size = 10
+text = "шаг"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="description" type="VBoxContainer" parent="Control/TabContainer/Задания/texture/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="_space" type="Control" parent="Control/TabContainer/Задания/texture/hbox/description"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="description_texture" type="TextureRect" parent="Control/TabContainer/Задания/texture/hbox/description"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("11_00kwt")
+expand_mode = 4
+
+[node name="description_vbox" type="VBoxContainer" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="title_label" type="Label" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_3wg7w")
+theme_override_font_sizes/font_size = 10
+text = "Описание"
+autowrap_mode = 2
+
+[node name="description_label" type="Label" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.293313, 0.293313, 0.293313, 1)
+theme_override_fonts/font = ExtResource("2_bhofp")
+theme_override_font_sizes/font_size = 10
+text = "Сделайте что-то"
+autowrap_mode = 2
+
+[node name="steps_vbox" type="VBoxContainer" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="_step_tmp" type="Control" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox/steps_vbox"]
+custom_minimum_size = Vector2(0, 16.32)
+layout_mode = 2
+
+[node name="checkmark" type="Sprite2D" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox/steps_vbox/_step_tmp"]
+self_modulate = Color(0.486728, 0.486728, 0.486728, 1)
+position = Vector2(6, 8)
+scale = Vector2(0.538, 0.538)
+texture = ExtResource("13_ak53x")
+hframes = 2
+
+[node name="label" type="Label" parent="Control/TabContainer/Задания/texture/hbox/description/description_texture/description_vbox/steps_vbox/_step_tmp"]
+modulate = Color(0.607843, 0.678431, 0.717647, 1)
+layout_mode = 2
+offset_left = 13.0
+offset_top = 1.0
+offset_right = 66.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_bhofp")
+theme_override_font_sizes/font_size = 9
+text = "Выполнить"
+vertical_alignment = 1
+
+[node name="Система" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/TabContainer/Система"]
+position = Vector2(238, 114)
+scale = Vector2(0.466065, 0.466065)
+texture = ExtResource("13_fgl3m")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control/TabContainer/Система/Sprite2D"]
+position = Vector2(0, -74.6761)
+scale = Vector2(5.52245, 5.63677)
+texture = ExtResource("14_ak53x")
+vframes = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="Control/TabContainer/Система/Sprite2D"]
+position = Vector2(0, 35.7147)
+scale = Vector2(5.52245, 5.63677)
+texture = ExtResource("14_ak53x")
+vframes = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="Control/TabContainer/Система/Sprite2D"]
+position = Vector2(-6.10352e-05, 139.612)
+scale = Vector2(5.52245, 5.63677)
+texture = ExtResource("14_ak53x")
+vframes = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Система"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -59.5
+offset_right = 70.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.06459, 1.42829)
+
+[node name="Button_Save" type="Button" parent="Control/TabContainer/Система/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Сохранить"
+
+[node name="Button_Load" type="Button" parent="Control/TabContainer/Система/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Загрузить"
+
+[node name="Button_Quit" type="Button" parent="Control/TabContainer/Система/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Выход"
+
+[node name="Label" type="Label" parent="Control"]
+modulate = Color(1, 1, 1, 0.643137)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -131.0
+offset_right = -160.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[ Пауза ]"

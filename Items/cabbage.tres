@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://exwsofhx0umk"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_bguar"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="4_1wgi7"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="5_7r46l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bguar"]
+atlas = ExtResource("5_7r46l")
+region = Rect2(144, 80, 16, 16)
+
+[resource]
+script = ExtResource("4_1wgi7")
+name = "Капуста"
+description = ""
+texture = SubResource("AtlasTexture_bguar")
+cost = 10
+effects = Array[ExtResource("1_bguar")]([])
+metadata/_custom_type_script = "uid://b405hrw22am82"

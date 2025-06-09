@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://kfaja00m2jvr"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_ivo3y"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="4_cen7q"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="5_v8pm5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivo3y"]
+atlas = ExtResource("5_v8pm5")
+region = Rect2(128, 144, 16, 16)
+
+[resource]
+script = ExtResource("4_cen7q")
+name = "Супер-растение"
+description = ""
+texture = SubResource("AtlasTexture_ivo3y")
+cost = 10
+effects = Array[ExtResource("1_ivo3y")]([])
+metadata/_custom_type_script = "uid://b405hrw22am82"

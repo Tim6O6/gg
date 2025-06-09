@@ -1,0 +1,63 @@
+[gd_scene load_steps=14 format=4 uid="uid://df76s62yxqv04"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_au38e"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_55vtl"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_yadv7"]
+[ext_resource type="PackedScene" uid="uid://diex2e34r23qo" path="res://Tile Maps/shop_tilemap_layer.tscn" id="4_wxwj7"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_o8ftm"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="6_nv76k"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_qo51e"]
+[ext_resource type="Resource" uid="uid://bwxx5ghppaq3t" path="res://npc/00_npcs/neighbor.tres" id="7_fgmcg"]
+[ext_resource type="PackedScene" uid="uid://dapdr3ojo2pha" path="res://npc/npc_behavior_wander.tscn" id="8_igv22"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="9_kl53c"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="10_xchjo"]
+[ext_resource type="Resource" uid="uid://csvi3x1wp3gy6" path="res://npc/00_npcs/npc_01.tres" id="11_yrvk7"]
+[ext_resource type="Resource" uid="uid://cdc3sykvmnn27" path="res://npc/00_npcs/00_hero.tres" id="12_uk11w"]
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_au38e")
+music = ExtResource("2_55vtl")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_yadv7")]
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_yadv7")]
+tile_map_data = PackedByteArray("AAAEAAMAAQACAAQAAAAFAAMAAQACAAQAAAADAAMAAQADAAQAAAAGAAMAAQADAAQAAAA=")
+
+[node name="ShopTilemapLayer" parent="." instance=ExtResource("4_wxwj7")]
+tile_map_data = PackedByteArray("AAAGAAgAAAADAAQAAAAGAAkAAAADAAMAAAAHAAgAAAAEAAQAAAAHAAkAAAAEAAMAAAAIAAgAAAAFAAQAAAAIAAkAAAAFAAMAAAAGAAoAAAADAAQAAAAHAAoAAAAEAAQAAAAIAAoAAAAFAAQAAAADAAkAAAAEAAMAAAADAAoAAAAEAAQAAAAEAAkAAAAFAAMAAAAEAAoAAAAFAAQAAAAFAAkAAAAFAAMAAAAFAAoAAAAFAAQAAAADAAcAAAAEAAMAAAADAAgAAAAEAAQAAAAEAAcAAAAFAAMAAAAEAAgAAAAFAAQAAAAFAAcAAAAFAAMAAAAFAAgAAAAFAAQAAAADAAUAAAAEAAMAAAADAAYAAAAEAAQAAAAEAAUAAAADAAQAAAAEAAYAAAAFAAQAAAAFAAUAAAAEAAQAAAAFAAYAAAAFAAQAAAAGAAUAAAAFAAQAAAAGAAYAAAADAAQAAAAHAAUAAAADAAQAAAAHAAYAAAAEAAQAAAAIAAUAAAAEAAQAAAAIAAYAAAAFAAQAAAAGAAcAAAADAAMAAAAHAAcAAAAEAAMAAAAIAAcAAAAFAAMAAAAJAAkAAAADAAMAAAAJAAoAAAADAAQAAAAKAAkAAAADAAMAAAAKAAoAAAADAAQAAAALAAkAAAAEAAMAAAALAAoAAAAEAAQAAAAJAAcAAAADAAMAAAAJAAgAAAADAAQAAAAKAAcAAAADAAQAAAAKAAgAAAADAAQAAAALAAcAAAAEAAQAAAALAAgAAAAEAAQAAAAJAAUAAAAFAAQAAAAJAAYAAAADAAQAAAAKAAUAAAADAAQAAAAKAAYAAAADAAMAAAALAAUAAAAEAAQAAAALAAYAAAAEAAMAAAAJAAQAAAAEAAQAAAAKAAQAAAADAAMAAAALAAQAAAAEAAMAAAADAAQAAAAEAAQAAAAEAAQAAAADAAMAAAAFAAQAAAADAAQAAAAGAAQAAAAEAAQAAAAHAAQAAAAFAAQAAAAIAAQAAAADAAQAAAACAAkAAAACAAQAAAACAAoAAAACAAQAAAACAAcAAAACAAQAAAACAAgAAAACAAQAAAACAAUAAAACAAQAAAACAAYAAAACAAQAAAACAAMAAAACAAQAAAACAAQAAAACAAQAAAADAAMAAAAEAAMAAAAEAAMAAAAFAAMAAAAFAAMAAAADAAMAAAAGAAMAAAAEAAMAAAAHAAMAAAAFAAMAAAAIAAMAAAADAAMAAAAJAAMAAAAEAAMAAAAKAAMAAAADAAMAAAALAAMAAAAEAAMAAAAMAAMAAAAFAAMAAAAMAAQAAAAFAAMAAAAMAAUAAAAFAAQAAAAMAAcAAAAFAAQAAAAMAAgAAAAFAAQAAAAMAAkAAAAFAAMAAAAMAAoAAAAFAAQAAAAMAAYAAAAFAAMAAAAKAAsAAAAEAAUAAAALAAsAAAAFAAUAAAAMAAsAAAAFAAUAAAAJAAsAAAADAAUAAAADAAsAAAAEAAUAAAAEAAsAAAAFAAUAAAAFAAsAAAAFAAUAAAACAAsAAAACAAUAAAACAAIAAAACAAIAAAADAAIAAAAEAAIAAAAEAAIAAAAEAAIAAAAFAAIAAAAEAAIAAAAGAAIAAAAEAAIAAAAIAAIAAAAEAAIAAAAJAAIAAAAEAAIAAAAKAAIAAAAEAAIAAAAHAAIAAAAEAAIAAAALAAIAAAAEAAIAAAAMAAIAAAAEAAIAAAANAAsAAAAGAAUAAAANAAIAAAAGAAIAAAANAAMAAAAGAAMAAAANAAQAAAAGAAQAAAANAAUAAAAGAAMAAAANAAYAAAAGAAQAAAANAAcAAAAGAAMAAAANAAgAAAAGAAQAAAANAAkAAAAGAAMAAAANAAoAAAAGAAQAAAAGAAsAAAAEAAUAAAAHAAsAAAAHAAoAAAAHAAwAAAAHAAsAAAAIAAsAAAAIAAoAAAAIAAwAAAAIAAsAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_o8ftm")]
+position = Vector2(257, 324)
+
+[node name="NPC" parent="." instance=ExtResource("6_nv76k")]
+position = Vector2(370, 160)
+npc_resource = ExtResource("7_fgmcg")
+sprite_animation_frames = Vector2(4, 1)
+sprite_animation_frame = 1
+enable_animation = false
+
+[node name="NpcBehaviorWander" parent="NPC" instance=ExtResource("8_igv22")]
+wander_range = 6
+wander_speed = 20.0
+idle_duration = 2.0
+
+[node name="DialogInteraction" parent="NPC" instance=ExtResource("9_kl53c")]
+
+[node name="DialogText" type="Node" parent="NPC/DialogInteraction"]
+script = ExtResource("10_xchjo")
+text = "Привет, сосед!"
+npc_info = ExtResource("11_yrvk7")
+
+[node name="DialogText2" type="Node" parent="NPC/DialogInteraction"]
+script = ExtResource("10_xchjo")
+text = "
+[wave]Привет![/wave]"
+npc_info = ExtResource("12_uk11w")
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_qo51e")]
+position = Vector2(256, 347)
+level = "uid://7x5jl2t7kah4"
+center_player = true
+size = 1
+side = 3

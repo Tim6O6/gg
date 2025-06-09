@@ -1,0 +1,204 @@
+[gd_scene load_steps=20 format=4 uid="uid://bv5b7yw3o6pnb"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_2q7np"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_2o1tp"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_onocn"]
+[ext_resource type="Resource" uid="uid://dhr3255mp4lox" path="res://quests/beat_boss.tres" id="5_dnrww"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_gcaqr"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_ymk7l"]
+[ext_resource type="Texture2D" uid="uid://dd1fki6silpr8" path="res://assets/2 корпус ЛТУ цвет готовое.png" id="7_2q7np"]
+[ext_resource type="Texture2D" uid="uid://bepo5bbe0aptf" path="res://assets/sakura.png" id="8_2o1tp"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="8_f1qyc"]
+[ext_resource type="Resource" uid="uid://behqu6x8fow0a" path="res://quests/cleanup_sakura.tres" id="9_dnrww"]
+[ext_resource type="Script" uid="uid://bqyjd4eb4lb2l" path="res://Levels/Area01/scene2_quest.gd" id="10_cc337"]
+[ext_resource type="PackedScene" uid="uid://1j7jstncpm27" path="res://Props/Plants/sakura_petals.tscn" id="11_f1qyc"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="12_oyvft"]
+[ext_resource type="PackedScene" uid="uid://b7x3cvq6i0qvf" path="res://Enemies/Slime/slime.tscn" id="14_cc337"]
+[ext_resource type="PackedScene" uid="uid://bwppesqootpqu" path="res://Enemies/Slime/slime2.tscn" id="15_077ij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwift"]
+size = Vector2(210, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vojwh"]
+size = Vector2(700, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffhhm"]
+size = Vector2(36, 426)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2o1tp"]
+
+[node name="scene2" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_2q7np")
+music = ExtResource("2_2o1tp")
+
+[node name="QuestActivatedSwitch2" parent="." instance=ExtResource("8_f1qyc")]
+remove_when_completed = false
+linked_quest = ExtResource("5_dnrww")
+settings_summary = "UPDATE QUEST:
+Quest: Победи босса
+Checking if player has quest"
+
+[node name="OutsideTilemapLayer" parent="QuestActivatedSwitch2" instance=ExtResource("3_onocn")]
+tile_map_data = PackedByteArray("AAAPAAQAAQAUAAIAAAARAAQAAQAUAAIAAAAQAAQAAQAUAAIAAAARAAMAAQAUAAEAAAAQAAMAAQAUAAEAAAAPAAMAAQAUAAEAAAAPAAUAAQAUAAMAAAAQAAUAAQAUAAMAAAARAAUAAQAUAAMAAAAOAAUAAQAUAAIAAAAOAAMAAQAUAAIAAAA=")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_onocn")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAKAP//AQAGAAYAAAAKAAAAAQAGAAYAAAAKAAEAAQAGAAYAAAAKAAIAAQAUAAEAAAAKAAgAAQAGAAYAAAAKAAkAAQAGAAYAAAALAP//AQAHAAgAACALAAAAAQAGAAYAAAALAAEAAQAGAAYAAAALAAIAAQAUAAEAAAALAAgAAQAJAAgAACALAAkAAQAGAAYAAAAMAP//AQAJAAYAACAMAAAAAQAGAAYAAAAMAAEAAQAHAAgAAAAMAAIAAQAUAAEAAAAMAAgAAQAJAAcAACAMAAkAAQAJAAcAACANAP//AQAGAAYAAAANAAAAAQAGAAYAAAANAAEAAQAGAAYAAAANAAIAAQAUAAEAAAANAAgAAQAGAAYAAAANAAkAAQAJAAcAAAARAP//AQAGAAYAAAARAAAAAQAGAAYAAAARAAEAAQAGAAYAAAARAAIAAQAJAAYAAAARAAgAAQAJAAcAAAARAAkAAQAHAAYAAAD+////AQAGAAYAAAAFAAYAAQAJAAYAAAAGAAgAAQAGAAYAAAAHAAgAAQAGAAYAAAAHAAkAAQAJAAgAACAIAAkAAQAJAAcAACD+/wAAAQAIAAYAACD+/wEAAQAGAAYAAAD+/wIAAQAGAAYAAAD+/wMAAQAGAAYAAAD+/wQAAQAHAAcAAAD+/wUAAQAGAAYAAAD+/wYAAQAGAAYAAAD+/wcAAQAGAAYAAAD+/wgAAQAGAAYAAAD+/wkAAQAIAAYAACD/////AQAGAAYAAAD//wYAAQAIAAgAAAD//wcAAQAGAAYAAAD//wgAAQAGAAYAAAD//wkAAQAGAAYAAAADAP//AQAGAAYAAAADAAYAAQAGAAYAAAADAAcAAQAHAAcAACADAAgAAQAGAAYAAAADAAkAAQAIAAcAACAEAP//AQAIAAcAAAAEAAYAAQAHAAYAAAAEAAcAAQAGAAYAAAAEAAgAAQAGAAYAAAAEAAkAAQAGAAYAAAAFAP//AQAJAAYAACAFAAAAAQAJAAYAAAAFAAEAAQAGAAYAAAAFAAIAAQAGAAYAAAAFAAMAAQAJAAcAAAAFAAQAAQAJAAcAAAAFAAcAAQAIAAcAAAAFAAgAAQAGAAYAAAAFAAkAAQAJAAYAACAGAP//AQAHAAYAAAAGAAAAAQAGAAYAAAAGAAEAAQAGAAYAAAAGAAIAAQATAAEAAAAGAAkAAQAGAAYAAAAHAP//AQAIAAcAACAHAAAAAQAHAAYAAAAHAAEAAQAGAAYAAAAHAAIAAQAUAAEAAAAIAP//AQAIAAgAACAIAAAAAQAJAAcAAAAIAAEAAQAGAAYAAAAIAAIAAQAUAAEAAAAIAAgAAQAIAAYAACAJAP//AQAHAAYAACAJAAAAAQAIAAgAAAAJAAEAAQAGAAYAAAAJAAIAAQAUAAEAAAAJAAgAAQAGAAYAAAAJAAkAAQAGAAYAAAD//wAAAQAIAAgAACD//wEAAQAIAAgAACD//wIAAQAGAAYAAAD//wMAAQAGAAYAAAD//wQAAQAHAAYAAAADAAAAAQAIAAcAAAADAAEAAQAIAAYAAAADAAIAAQAGAAYAAAADAAMAAQAGAAYAAAADAAQAAQAGAAYAAAAEAAAAAQAGAAYAAAAEAAEAAQAGAAYAAAAEAAIAAQAGAAYAAAAEAAMAAQAJAAcAAAAEAAQAAQAGAAYAAAADAAUAAQAHAAYAAAAEAAUAAQAGAAYAAAD//wUAAQAHAAcAAAAFAAUAAQAIAAYAAAAAAP//AQATAAIAAAAAAAAAAQATAAIAAAAAAAEAAQATAAIAAAAAAAIAAQATAAIAAAAAAAMAAQATAAIAAAAAAAQAAQATAAIAAAAAAAUAAQATAAIAAAAAAAYAAQATAAIAAAAAAAcAAQATAAIAAAAAAAgAAQATAAIAAAAAAAkAAQATAAIAAAABAP//AQAUAAIAAAABAAAAAQAUAAIAAAABAAEAAQAUAAIAAAABAAIAAQAUAAIAAAABAAMAAQAUAAIAAAABAAQAAQAUAAIAAAABAAUAAQAUAAIAAAABAAYAAQAUAAIAAAABAAcAAQAUAAIAAAABAAgAAQAUAAIAAAABAAkAAQAUAAIAAAACAP//AQAVAAIAAAACAAAAAQAVAAIAAAACAAEAAQAVAAIAAAACAAIAAQAVAAIAAAACAAMAAQAVAAIAAAACAAQAAQAVAAIAAAACAAUAAQAVAAIAAAACAAYAAQAVAAIAAAACAAcAAQAVAAIAAAACAAgAAQAVAAIAAAACAAkAAQAVAAIAAAAOAP//AQAGAAYAAAAOAAAAAQAHAAcAAAAOAAEAAQAGAAYAAAAOAAIAAQAVAAEAAAAOAAgAAQAIAAYAAAAOAAkAAQAHAAYAAAAPAP//AQAGAAYAAAAPAAAAAQAIAAcAAAAPAAEAAQAGAAYAAAAPAAIAAQAHAAcAAAAPAAgAAQAGAAYAAAAPAAkAAQAHAAcAAAAQAP//AQAGAAYAAAAQAAAAAQAGAAYAAAAQAAEAAQAIAAcAAAAQAAIAAQAGAAYAAAAQAAgAAQAGAAYAAAAQAAkAAQAGAAYAAAAGAAMAAQATAAIAAAAGAAQAAQATAAIAAAAGAAUAAQATAAIAAAAGAAYAAQATAAMAAAAHAAMAAQAUAAIAAAAHAAQAAQAUAAIAAAAHAAUAAQAUAAIAAAAHAAYAAQAUAAMAAAAIAAMAAQAUAAIAAAAIAAQAAQAUAAIAAAAIAAUAAQAUAAIAAAAIAAYAAQAUAAMAAAAJAAMAAQAUAAIAAAAJAAQAAQAUAAIAAAAJAAUAAQAUAAIAAAAJAAYAAQAUAAMAAAAKAAMAAQAUAAIAAAAKAAQAAQAUAAIAAAAKAAUAAQAUAAIAAAAKAAYAAQAUAAMAAAALAAMAAQAUAAIAAAALAAQAAQAUAAIAAAALAAUAAQAUAAIAAAALAAYAAQAUAAMAAAAMAAMAAQAUAAIAAAAMAAQAAQAUAAIAAAAMAAUAAQAUAAIAAAAMAAYAAQAUAAMAAAANAAMAAQAUAAIAAAANAAQAAQAUAAIAAAANAAUAAQAUAAIAAAANAAYAAQAUAAMAAAAOAAMAAQAVAAIAAAAOAAYAAQAVAAMAAAAPAAMAAQAGAAYAAAAPAAQAAQAGAAYAAAAPAAUAAQAGAAYAAAAPAAYAAQAIAAcAAAAQAAMAAQAGAAYAAAAQAAQAAQAGAAYAAAAQAAUAAQAGAAYAAAAQAAYAAQAGAAYAAAARAAMAAQAGAAYAAAARAAQAAQAGAAYAAAARAAUAAQAGAAYAAAARAAYAAQAJAAcAAAAHAAcAAQAHAAYAAAAGAAcAAQAGAAYAAAAIAAcAAQAGAAYAAAAJAAcAAQAGAAYAAAAKAAcAAQAGAAYAAAALAAcAAQAJAAYAAAAMAAcAAQAGAAYAAAANAAcAAQAGAAYAAAAOAAcAAQAJAAgAAAAPAAcAAQAGAAYAAAAQAAcAAQAIAAYAAAARAAcAAQAGAAYAAAAOAAUAAQAVAAIAAAAOAAQAAQAUAAIAAAA=")
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_onocn")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAFAAIAAQAIAAQAAAALAAkAAQAIAAQAAAAQAAgAAQAIAAQAAAADAAAAAQAIAAQAAAD+/wUAAQAIAAQAAAD+/wEAAQAIAAQAAAAKAP//AQAIAAQAAAAFAAkAAQAFAAEAAAAJAAAAAQAFAAEAAAD//wcAAQAFAAEAAAARAAEAAQAFAAEAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_gcaqr")]
+position = Vector2(48, 294)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_ymk7l")]
+position = Vector2(46, 311)
+level = "uid://btaitoxju13l3"
+target_transition_area = "LevelTransitionNext"
+center_player = true
+size = 3
+side = 3
+
+[node name="LevelTransitionCorpus" parent="." instance=ExtResource("6_ymk7l")]
+position = Vector2(296, 198)
+level = "uid://lj3w7cnjpng3"
+center_player = true
+side = 2
+
+[node name="LevelTransitionBoss" parent="." instance=ExtResource("6_ymk7l")]
+position = Vector2(575, 145)
+level = "uid://dywyblmbixwli"
+center_player = true
+side = 1
+
+[node name="LevelTransitionNext" parent="." instance=ExtResource("6_ymk7l")]
+position = Vector2(48, -14)
+level = "uid://dmp463ac2opcx"
+center_player = true
+side = 2
+
+[node name="second_corpus" type="StaticBody2D" parent="."]
+position = Vector2(338, 94)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="second_corpus"]
+texture = ExtResource("7_2q7np")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="second_corpus"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_bwift")
+
+[node name="colliders" type="Node2D" parent="."]
+position = Vector2(417, -32)
+
+[node name="collider" type="StaticBody2D" parent="colliders"]
+position = Vector2(-158, 305)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider2" type="StaticBody2D" parent="colliders"]
+position = Vector2(-158, -18)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider2"]
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider3" type="StaticBody2D" parent="colliders"]
+position = Vector2(-498, 177)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider3"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="collider4" type="StaticBody2D" parent="colliders"]
+position = Vector2(177, 175)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider4"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="sakura1" type="StaticBody2D" parent="."]
+position = Vector2(480, 256)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="sakura1"]
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("8_2o1tp")
+
+[node name="shape" type="CollisionShape2D" parent="sakura1"]
+position = Vector2(-2, 38)
+shape = SubResource("RectangleShape2D_2o1tp")
+
+[node name="sakura2" type="StaticBody2D" parent="."]
+position = Vector2(485, 19)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="sakura2"]
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("8_2o1tp")
+
+[node name="shape" type="CollisionShape2D" parent="sakura2"]
+position = Vector2(-2, 38)
+shape = SubResource("RectangleShape2D_2o1tp")
+
+[node name="sakura3" type="StaticBody2D" parent="."]
+position = Vector2(182, 22)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="sakura3"]
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("8_2o1tp")
+
+[node name="shape" type="CollisionShape2D" parent="sakura3"]
+position = Vector2(-2, 38)
+shape = SubResource("RectangleShape2D_2o1tp")
+
+[node name="QuestActivatedSwitch" parent="." instance=ExtResource("8_f1qyc")]
+position = Vector2(721, 211)
+linked_quest = ExtResource("9_dnrww")
+settings_summary = "UPDATE QUEST:
+Quest: Почистить листья сакуры
+Checking if player has quest"
+
+[node name="quest_handler" type="Node2D" parent="QuestActivatedSwitch"]
+position = Vector2(-721, -211)
+script = ExtResource("10_cc337")
+
+[node name="plants" type="Node2D" parent="QuestActivatedSwitch/quest_handler"]
+
+[node name="Plant" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_f1qyc")]
+position = Vector2(154, 75)
+
+[node name="Plant2" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_f1qyc")]
+position = Vector2(447, 293)
+
+[node name="Plant3" parent="QuestActivatedSwitch/quest_handler/plants" instance=ExtResource("11_f1qyc")]
+position = Vector2(417, 274)
+
+[node name="QuestAdvanceTrigger" parent="QuestActivatedSwitch/quest_handler" instance=ExtResource("12_oyvft")]
+linked_quest = ExtResource("9_dnrww")
+quest_step = 1
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Почистить листья сакуры
+Step: 1 - 
+Complete: true"
+
+[node name="orange_squirrel2" parent="." instance=ExtResource("14_cc337")]
+position = Vector2(-23, 28)
+
+[node name="watermelon_hedgedog" parent="." instance=ExtResource("15_077ij")]
+position = Vector2(281, 276)

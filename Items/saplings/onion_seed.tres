@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Sapling" load_steps=8 format=3 uid="uid://dx43alwldj3lt"]
+
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="1_bq8iy"]
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_yvxaq"]
+[ext_resource type="Script" uid="uid://ccnlaupl3qndu" path="res://Items/scripts/sapling.gd" id="2_bq8iy"]
+[ext_resource type="Resource" uid="uid://dy8f6ncc2ndo" path="res://Items/onion.tres" id="3_ey3yb"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="4_cva5u"]
+
+[sub_resource type="Resource" id="Resource_bcaed"]
+script = ExtResource("1_bq8iy")
+item = ExtResource("3_ey3yb")
+quantity = 1
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyv24"]
+atlas = ExtResource("4_cva5u")
+region = Rect2(32, 112, 16, 16)
+
+[resource]
+script = ExtResource("2_bq8iy")
+grow_levels = 8
+grow_time = 15.0
+grow_reward_xp = 100
+grow_rewards = Array[ExtResource("1_bq8iy")]([SubResource("Resource_bcaed")])
+name = "Луковое семя"
+description = "Простое луковое семя. Растёт 10 секунд"
+texture = SubResource("AtlasTexture_tyv24")
+cost = 1
+effects = Array[ExtResource("1_yvxaq")]([])
+metadata/_custom_type_script = "uid://ccnlaupl3qndu"

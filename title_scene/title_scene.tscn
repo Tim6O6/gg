@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://5t7fprdld7j"]
+
+[ext_resource type="Script" uid="uid://c2mayusmuuk6r" path="res://title_scene/title_scene.gd" id="1_lt026"]
+[ext_resource type="AudioStream" uid="uid://cph6d67x0q2hx" path="res://title_scene/audio/waves.mp3" id="2_1kmx1"]
+[ext_resource type="AudioStream" uid="uid://bs7rsijo2pb3f" path="res://title_scene/audio/menu_focus.wav" id="3_w8rst"]
+[ext_resource type="AudioStream" uid="uid://08aqunggwta1" path="res://title_scene/audio/menu_select.wav" id="4_i0vak"]
+[ext_resource type="Texture2D" uid="uid://cc1v8ydd57eom" path="res://title_scene/sprites/Главное меню (переделано).png" id="5_1a1kh"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_e557l"]
+[ext_resource type="PackedScene" uid="uid://dhr1wkvl1431s" path="res://title_scene/splash_scene.tscn" id="8_hlrge"]
+
+[node name="TitleScene" type="Node2D"]
+position = Vector2(0, 7)
+scale = Vector2(1.00741, 0.975067)
+script = ExtResource("1_lt026")
+music = ExtResource("2_1kmx1")
+button_focus_audio = ExtResource("3_w8rst")
+button_press_audio = ExtResource("4_i0vak")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonNew" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -32.0
+offset_right = -72.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.583311, 0.862594)
+flat = true
+
+[node name="ButtonContinue" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -32.0
+offset_right = 33.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.819532, 0.933929)
+flat = true
+
+[node name="SplashScene" parent="CanvasLayer" instance=ExtResource("8_hlrge")]
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_e557l")]
+position = Vector2(240, 139)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(245.182, 133.324)
+scale = Vector2(0.476648, 0.384838)
+texture = ExtResource("5_1a1kh")

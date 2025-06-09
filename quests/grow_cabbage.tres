@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://xggbfmqgg8vq"]
+
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="1_mj0og"]
+[ext_resource type="Resource" uid="uid://cfxj2kgey0t27" path="res://Items/saplings/superfruit_seed.tres" id="2_mj0og"]
+[ext_resource type="Script" uid="uid://ej3xbi7xbvg1" path="res://quests/scripts/quest_resource.gd" id="3_7hyhh"]
+
+[sub_resource type="Resource" id="Resource_pktd2"]
+script = ExtResource("1_mj0og")
+item = ExtResource("2_mj0og")
+quantity = 2
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[resource]
+script = ExtResource("3_7hyhh")
+title = "Вырастить капусту"
+description = "Вырасти семена капусты и принеси их обратно"
+steps = Array[String](["Посади семена и вырасти капусту", "Принеси выращенную капусту обратно"])
+reward_xp = 1500
+reward_items = Array[ExtResource("1_mj0og")]([SubResource("Resource_pktd2")])

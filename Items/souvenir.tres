@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://dsn25brd3t8mu"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_yamvo"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="2_q5hra"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="3_hxjhy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o1jf"]
+atlas = ExtResource("3_hxjhy")
+region = Rect2(80, 200, 16, 24)
+
+[resource]
+script = ExtResource("2_q5hra")
+name = "Редкое растение"
+description = "Кто-то потерял растение"
+texture = SubResource("AtlasTexture_7o1jf")
+cost = 600
+effects = Array[ExtResource("1_yamvo")]([])

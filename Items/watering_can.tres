@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cnpv20kj0tvbn"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_50ilg"]
+[ext_resource type="Texture2D" uid="uid://cvqx21wrwetwd" path="res://assets/Tilemap.png" id="3_5e4vh"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="4_14eft"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu6b6"]
+atlas = ExtResource("3_5e4vh")
+region = Rect2(64, 320, 32, 32)
+
+[resource]
+script = ExtResource("4_14eft")
+name = "Лейка"
+description = "Поливает"
+texture = SubResource("AtlasTexture_wu6b6")
+cost = 185
+effects = Array[ExtResource("1_50ilg")]([])

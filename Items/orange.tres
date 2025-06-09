@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://1ltrcjsem4sd"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_kvs3d"]
+[ext_resource type="AudioStream" uid="uid://bwnitghsawfi0" path="res://Items/item_effects/hp-up.wav" id="2_kvs3d"]
+[ext_resource type="Script" uid="uid://lhem15j5m6we" path="res://Items/item_effects/item_effect_heal.gd" id="3_wn600"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="4_dxnor"]
+[ext_resource type="Texture2D" uid="uid://cxkgbj3u4q2lo" path="res://Items/sprites/orange.png" id="5_kvs3d"]
+
+[sub_resource type="Resource" id="Resource_iivtq"]
+script = ExtResource("3_wn600")
+heal_amount = 1
+audio = ExtResource("2_kvs3d")
+use_description = ""
+metadata/_custom_type_script = "uid://lhem15j5m6we"
+
+[resource]
+script = ExtResource("4_dxnor")
+name = "Апельсин"
+description = "Апельсин"
+texture = ExtResource("5_kvs3d")
+cost = 10
+effects = Array[ExtResource("1_kvs3d")]([SubResource("Resource_iivtq")])

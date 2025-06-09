@@ -1,0 +1,92 @@
+[gd_scene load_steps=16 format=4 uid="uid://lj3w7cnjpng3"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_egdsf"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_pnlu4"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_cdcdx"]
+[ext_resource type="PackedScene" uid="uid://diex2e34r23qo" path="res://Tile Maps/shop_tilemap_layer.tscn" id="4_uplwp"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_vxri4"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_n3vkn"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_ot04p"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_tqe41"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="9_a60nw"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="11_eo2xe"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="12_a5owk"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="13_1fpym"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="14_gnta6"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="15_qlgs8"]
+[ext_resource type="Resource" uid="uid://behqu6x8fow0a" path="res://quests/cleanup_sakura.tres" id="16_qmtf1"]
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_egdsf")
+music = ExtResource("2_pnlu4")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_cdcdx")]
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_cdcdx")]
+
+[node name="ShopTilemapLayer" parent="." instance=ExtResource("4_uplwp")]
+tile_map_data = PackedByteArray("AAAFAAsAAAAEAAUAAAAEAAsAAAAEAAUAAAADAAsAAAAEAAUAAAACAAsAAAAEAAUAAAABAAsAAAAEAAUAAAAJAAsAAAAEAAUAAAAKAAsAAAAEAAUAAAALAAsAAAAEAAUAAAAMAAsAAAAEAAUAAAANAAsAAAAEAAUAAAAAAAsAAAACAAUAAAAOAAsAAAAGAAUAAAAGAAsAAAAEAAQAAAAHAAsAAAAEAAQAAAAIAAsAAAAEAAQAAAAAAAoAAAACAAQAAAAAAAkAAAACAAQAAAAAAAgAAAACAAQAAAAAAAcAAAACAAQAAAAAAAYAAAACAAQAAAAAAAUAAAACAAQAAAAAAAQAAAACAAQAAAAAAAMAAAACAAQAAAAAAAIAAAACAAQAAAAAAAEAAAACAAQAAAANAAAAAAAEAAIAAAAMAAAAAAAEAAIAAAALAAAAAAAEAAIAAAAKAAAAAAAEAAIAAAAJAAAAAAAEAAIAAAAIAAAAAAAEAAIAAAAHAAAAAAAEAAIAAAAGAAAAAAAEAAIAAAAFAAAAAAAEAAIAAAAEAAAAAAAEAAIAAAADAAAAAAAEAAIAAAACAAAAAAAEAAIAAAABAAAAAAAEAAIAAAAAAAAAAAACAAIAAAAOAAAAAAAGAAIAAAABAAEAAAADAAMAAAABAAIAAAADAAQAAAABAAMAAAADAAMAAAABAAQAAAADAAQAAAABAAUAAAADAAMAAAABAAYAAAADAAQAAAABAAcAAAADAAMAAAABAAgAAAADAAQAAAABAAkAAAADAAMAAAABAAoAAAADAAQAAAACAAEAAAAEAAMAAAACAAIAAAAEAAQAAAACAAMAAAAEAAMAAAACAAQAAAAEAAQAAAACAAUAAAAEAAMAAAACAAYAAAAEAAQAAAACAAcAAAAEAAMAAAACAAgAAAAEAAQAAAACAAkAAAAEAAMAAAACAAoAAAAEAAQAAAADAAEAAAAFAAMAAAADAAIAAAAFAAQAAAADAAMAAAADAAMAAAADAAQAAAADAAQAAAADAAUAAAADAAMAAAADAAYAAAADAAQAAAADAAcAAAADAAMAAAADAAgAAAADAAQAAAADAAkAAAAFAAMAAAADAAoAAAAFAAQAAAAEAAEAAAAFAAMAAAAEAAIAAAAFAAQAAAAEAAMAAAAEAAMAAAAEAAQAAAAEAAQAAAAEAAUAAAAEAAMAAAAEAAYAAAAEAAQAAAAEAAcAAAAEAAMAAAAEAAgAAAAEAAQAAAAEAAkAAAADAAMAAAAEAAoAAAADAAQAAAAFAAEAAAADAAMAAAAFAAIAAAADAAQAAAAFAAMAAAAFAAMAAAAFAAQAAAAFAAQAAAAFAAUAAAAFAAMAAAAFAAYAAAAFAAQAAAAFAAcAAAAFAAMAAAAFAAgAAAAFAAQAAAAFAAkAAAAEAAMAAAAFAAoAAAAEAAQAAAAGAAEAAAAEAAMAAAAGAAIAAAAEAAQAAAAGAAMAAAADAAMAAAAGAAQAAAADAAQAAAAGAAUAAAADAAMAAAAGAAYAAAADAAQAAAAGAAcAAAADAAMAAAAGAAgAAAADAAQAAAAGAAkAAAAFAAMAAAAGAAoAAAAFAAQAAAAHAAEAAAAFAAMAAAAHAAIAAAAFAAQAAAAHAAMAAAAEAAMAAAAHAAQAAAAEAAQAAAAHAAUAAAAEAAMAAAAHAAYAAAAEAAQAAAAHAAcAAAAEAAMAAAAHAAgAAAAEAAQAAAAHAAkAAAAEAAMAAAAHAAoAAAAEAAQAAAAIAAEAAAADAAMAAAAIAAIAAAADAAQAAAAIAAMAAAADAAMAAAAIAAQAAAADAAQAAAAIAAUAAAAFAAMAAAAIAAYAAAAFAAQAAAAIAAcAAAAFAAMAAAAIAAgAAAAFAAQAAAAIAAkAAAAFAAMAAAAIAAoAAAAFAAQAAAAJAAEAAAAEAAMAAAAJAAIAAAAEAAQAAAAJAAMAAAAEAAMAAAAJAAQAAAAEAAQAAAAJAAUAAAADAAMAAAAJAAYAAAADAAQAAAAJAAcAAAADAAMAAAAJAAgAAAADAAQAAAAJAAkAAAADAAMAAAAJAAoAAAADAAQAAAAKAAEAAAAFAAMAAAAKAAIAAAAFAAQAAAAKAAMAAAAFAAMAAAAKAAQAAAAFAAQAAAAKAAUAAAAEAAMAAAAKAAYAAAAEAAQAAAAKAAcAAAAEAAMAAAAKAAgAAAAEAAQAAAAKAAkAAAAEAAMAAAAKAAoAAAAEAAQAAAALAAEAAAADAAMAAAALAAIAAAADAAQAAAALAAMAAAADAAMAAAALAAQAAAADAAQAAAALAAUAAAAFAAMAAAALAAYAAAAFAAQAAAALAAcAAAAFAAMAAAALAAgAAAAFAAQAAAALAAkAAAADAAQAAAALAAoAAAADAAQAAAAMAAEAAAAEAAMAAAAMAAIAAAAEAAQAAAAMAAQAAAAEAAMAAAAMAAUAAAAEAAMAAAAMAAYAAAAEAAMAAAAMAAcAAAAEAAMAAAAMAAgAAAAEAAQAAAAMAAkAAAAEAAQAAAAMAAoAAAAEAAQAAAANAAEAAAAFAAMAAAANAAIAAAAFAAQAAAANAAUAAAAFAAMAAAANAAYAAAAFAAMAAAANAAcAAAAFAAMAAAANAAgAAAAFAAQAAAANAAkAAAAFAAQAAAANAAoAAAAFAAQAAAAOAAEAAAAGAAQAAAAOAAIAAAAGAAQAAAAOAAQAAAAGAAQAAAAOAAUAAAAGAAQAAAAOAAYAAAAGAAQAAAAOAAcAAAAGAAQAAAAOAAgAAAAGAAQAAAAOAAkAAAAGAAQAAAAOAAoAAAAGAAQAAAAMAAMAAAAEAAMAAAANAAMAAAAFAAMAAAAOAAMAAAAGAAQAAAANAAQAAAAFAAMAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_vxri4")]
+position = Vector2(240, 324)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_n3vkn")]
+position = Vector2(240, 352)
+level = "uid://bv5b7yw3o6pnb"
+target_transition_area = "LevelTransitionCorpus"
+center_player = true
+size = 3
+side = 3
+
+[node name="NPC_NERO" parent="." instance=ExtResource("7_ot04p")]
+position = Vector2(238, 181)
+npc_resource = ExtResource("8_tqe41")
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" instance=ExtResource("9_a60nw")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("16_qmtf1")
+settings_summary = "UPDATE QUEST:
+Quest: Почистить листья сакуры
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" instance=ExtResource("11_eo2xe")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_a5owk")
+text = "Привет! Мне нужно очистить листья сакуры на улице. Сможешь помочь?"
+npc_info = ExtResource("8_tqe41")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("13_1fpym")
+npc_info = ExtResource("8_tqe41")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_gnta6")
+text = "Хорошо"
+npc_info = ExtResource("8_tqe41")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("15_qlgs8")]
+position = Vector2(246, 164)
+signal_name = "selected"
+linked_quest = ExtResource("16_qmtf1")
+settings_summary = "UPDATE QUEST:
+Quest: Почистить листья сакуры
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("12_a5owk")
+text = "Спасибо тебе!"
+npc_info = ExtResource("8_tqe41")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_gnta6")
+text = "Нет! Не хочу"
+npc_info = ExtResource("8_tqe41")
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("12_a5owk")
+text = "Ну и ладно..."
+npc_info = ExtResource("8_tqe41")

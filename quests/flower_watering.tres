@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://b488tr74dw1k7"]
+
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="1_jspat"]
+[ext_resource type="Script" uid="uid://ej3xbi7xbvg1" path="res://quests/scripts/quest_resource.gd" id="2_6ip3e"]
+[ext_resource type="Resource" uid="uid://bi8j7ai8qulyp" path="res://Items/w_katana.tres" id="2_pchar"]
+
+[sub_resource type="Resource" id="Resource_a4egu"]
+script = ExtResource("1_jspat")
+item = ExtResource("2_pchar")
+quantity = 1
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[resource]
+script = ExtResource("2_6ip3e")
+title = "Полить цеты"
+description = "Полей цветы в комнате"
+steps = Array[String](["Найди лейку", "Полей цветы"])
+reward_xp = 300
+reward_items = Array[ExtResource("1_jspat")]([SubResource("Resource_a4egu")])

@@ -1,0 +1,138 @@
+[gd_scene load_steps=20 format=4 uid="uid://dom376h4aki0p"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_t6hdb"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_33twv"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_wlwyx"]
+[ext_resource type="PackedScene" uid="uid://diex2e34r23qo" path="res://Tile Maps/shop_tilemap_layer.tscn" id="4_iio0l"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_ywqx2"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_r264e"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_thui3"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_xypn5"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="9_r1gxd"]
+[ext_resource type="Resource" uid="uid://b488tr74dw1k7" path="res://quests/flower_watering.tres" id="10_wlwyx"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="11_a13aj"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="12_muph6"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="13_sj8u2"]
+[ext_resource type="Resource" uid="uid://csttk13v0yug7" path="res://npc/00_npcs/neighbor_female.tres" id="13_wlwyx"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="14_q31tk"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="15_jo5ml"]
+[ext_resource type="PackedScene" uid="uid://cpohuml8sje4u" path="res://Items/item_pickup/item_pickup.tscn" id="17_iio0l"]
+[ext_resource type="Resource" uid="uid://cnpv20kj0tvbn" path="res://Items/watering_can.tres" id="18_ywqx2"]
+[ext_resource type="PackedScene" uid="uid://o2gjsd7ai12j" path="res://Props/Plants/unwatered_plant.tscn" id="19_ywqx2"]
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_t6hdb")
+music = ExtResource("2_33twv")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_wlwyx")]
+tile_map_data = PackedByteArray("AAACAAkAAQANAAQAAAA=")
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_wlwyx")]
+tile_map_data = PackedByteArray("AAACAAEAAQADAAQAAAADAAEAAQACAAQAAAABAAEAAQADAAQAAAAEAAEAAQACAAQAAAAHAAEAAQAQAAcAAAAKAAEAAQAPAAcAAAACAAgAAQAIAAkAAAACAAkAAQAIAAoAAAABAAgAAQAGAAkAAAABAAkAAQAGAAoAAAADAAgAAQAGAAkAABADAAkAAQAGAAoAABACAAoAAQAHAAkAACABAAoAAQAGAAkAACADAAoAAQALAAkAACA=")
+
+[node name="ShopTilemapLayer" parent="." instance=ExtResource("4_iio0l")]
+tile_map_data = PackedByteArray("AAAFAAsAAAAEAAUAAAAEAAsAAAAEAAUAAAADAAsAAAAEAAUAAAACAAsAAAAEAAUAAAABAAsAAAAEAAUAAAAJAAsAAAAEAAUAAAAKAAsAAAAEAAUAAAALAAsAAAAEAAUAAAAMAAsAAAAEAAUAAAANAAsAAAAEAAUAAAAAAAsAAAACAAUAAAAOAAsAAAAGAAUAAAAGAAsAAAAEAAQAAAAHAAsAAAAEAAQAAAAIAAsAAAAEAAQAAAAAAAoAAAACAAQAAAAAAAkAAAACAAQAAAAAAAgAAAACAAQAAAAAAAcAAAACAAQAAAAAAAYAAAACAAQAAAAAAAUAAAACAAQAAAAAAAQAAAACAAQAAAAAAAMAAAACAAQAAAAAAAIAAAACAAQAAAAAAAEAAAACAAQAAAANAAAAAAAEAAIAAAAMAAAAAAAEAAIAAAALAAAAAAAEAAIAAAAKAAAAAAAEAAIAAAAJAAAAAAAEAAIAAAAIAAAAAAAEAAIAAAAHAAAAAAAEAAIAAAAGAAAAAAAEAAIAAAAFAAAAAAAEAAIAAAAEAAAAAAAEAAIAAAADAAAAAAAEAAIAAAACAAAAAAAEAAIAAAABAAAAAAAEAAIAAAAAAAAAAAACAAIAAAAOAAAAAAAGAAIAAAABAAEAAAADAAMAAAABAAIAAAADAAQAAAABAAMAAAADAAMAAAABAAQAAAADAAQAAAABAAUAAAADAAMAAAABAAYAAAADAAQAAAABAAcAAAADAAMAAAABAAgAAAADAAQAAAABAAkAAAADAAMAAAABAAoAAAADAAQAAAACAAEAAAAEAAMAAAACAAIAAAAEAAQAAAACAAMAAAAEAAMAAAACAAQAAAAEAAQAAAACAAUAAAAEAAMAAAACAAYAAAAEAAQAAAACAAcAAAAEAAMAAAACAAgAAAAEAAQAAAACAAkAAAAEAAMAAAACAAoAAAAEAAQAAAADAAEAAAAFAAMAAAADAAIAAAAFAAQAAAADAAMAAAADAAMAAAADAAQAAAADAAQAAAADAAUAAAADAAMAAAADAAYAAAADAAQAAAADAAcAAAADAAMAAAADAAgAAAADAAQAAAADAAkAAAAFAAMAAAADAAoAAAAFAAQAAAAEAAEAAAAFAAMAAAAEAAIAAAAFAAQAAAAEAAMAAAAEAAMAAAAEAAQAAAAEAAQAAAAEAAUAAAAEAAMAAAAEAAYAAAAEAAQAAAAEAAcAAAAEAAMAAAAEAAgAAAAEAAQAAAAEAAkAAAADAAMAAAAEAAoAAAADAAQAAAAFAAEAAAADAAMAAAAFAAIAAAADAAQAAAAFAAMAAAAFAAMAAAAFAAQAAAAFAAQAAAAFAAUAAAAFAAMAAAAFAAYAAAAFAAQAAAAFAAcAAAAFAAMAAAAFAAgAAAAFAAQAAAAFAAkAAAAEAAMAAAAFAAoAAAAEAAQAAAAGAAEAAAAEAAMAAAAGAAIAAAAEAAQAAAAGAAMAAAADAAMAAAAGAAQAAAADAAQAAAAGAAUAAAADAAMAAAAGAAYAAAADAAQAAAAGAAcAAAADAAMAAAAGAAgAAAADAAQAAAAGAAkAAAAFAAMAAAAGAAoAAAAFAAQAAAAHAAEAAAAFAAMAAAAHAAIAAAAFAAQAAAAHAAMAAAAEAAMAAAAHAAQAAAAEAAQAAAAHAAUAAAAEAAMAAAAHAAYAAAAEAAQAAAAHAAcAAAAEAAMAAAAHAAgAAAAEAAQAAAAHAAkAAAAEAAMAAAAHAAoAAAAEAAQAAAAIAAEAAAADAAMAAAAIAAIAAAADAAQAAAAIAAMAAAADAAMAAAAIAAQAAAADAAQAAAAIAAUAAAAFAAMAAAAIAAYAAAAFAAQAAAAIAAcAAAAFAAMAAAAIAAgAAAAFAAQAAAAIAAkAAAAFAAMAAAAIAAoAAAAFAAQAAAAJAAEAAAAEAAMAAAAJAAIAAAAEAAQAAAAJAAMAAAAEAAMAAAAJAAQAAAAEAAQAAAAJAAUAAAADAAMAAAAJAAYAAAADAAQAAAAJAAcAAAADAAMAAAAJAAgAAAADAAQAAAAJAAkAAAADAAMAAAAJAAoAAAADAAQAAAAKAAEAAAAFAAMAAAAKAAIAAAAFAAQAAAAKAAMAAAAFAAMAAAAKAAQAAAAFAAQAAAAKAAUAAAAEAAMAAAAKAAYAAAAEAAQAAAAKAAcAAAAEAAMAAAAKAAgAAAAEAAQAAAAKAAkAAAAEAAMAAAAKAAoAAAAEAAQAAAALAAEAAAADAAMAAAALAAIAAAADAAQAAAALAAMAAAADAAMAAAALAAQAAAADAAQAAAALAAUAAAAFAAMAAAALAAYAAAAFAAQAAAALAAcAAAAFAAMAAAALAAgAAAAFAAQAAAALAAkAAAADAAQAAAALAAoAAAADAAQAAAAMAAEAAAAEAAMAAAAMAAIAAAAEAAQAAAAMAAQAAAAEAAMAAAAMAAUAAAAEAAMAAAAMAAYAAAAEAAMAAAAMAAcAAAAEAAMAAAAMAAgAAAAEAAQAAAAMAAkAAAAEAAQAAAAMAAoAAAAEAAQAAAANAAEAAAAFAAMAAAANAAIAAAAFAAQAAAANAAUAAAAFAAMAAAANAAYAAAAFAAMAAAANAAcAAAAFAAMAAAANAAgAAAAFAAQAAAANAAkAAAAFAAQAAAANAAoAAAAFAAQAAAAOAAEAAAAGAAQAAAAOAAIAAAAGAAQAAAAOAAQAAAAGAAQAAAAOAAUAAAAGAAQAAAAOAAYAAAAGAAQAAAAOAAcAAAAGAAQAAAAOAAgAAAAGAAQAAAAOAAkAAAAGAAQAAAAOAAoAAAAGAAQAAAAMAAMAAAAEAAMAAAANAAMAAAAFAAMAAAAOAAMAAAAGAAQAAAANAAQAAAAFAAMAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_ywqx2")]
+position = Vector2(240, 324)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_r264e")]
+position = Vector2(240, 352)
+level = "uid://dmp463ac2opcx"
+target_transition_area = "LevelTransitionHostel"
+center_player = true
+size = 3
+side = 3
+
+[node name="NPC_NERO" parent="." instance=ExtResource("7_thui3")]
+position = Vector2(381, 212)
+npc_resource = ExtResource("13_wlwyx")
+sprite_animation_frames = Vector2(4, 1)
+sprite_animation_frame = 1
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" instance=ExtResource("9_r1gxd")]
+remove_when_activated = true
+remove_when_completed = false
+react_to_global_signal = true
+linked_quest = ExtResource("10_wlwyx")
+settings_summary = "UPDATE QUEST:
+Quest: Полить цеты
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" instance=ExtResource("11_a13aj")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_muph6")
+text = "Привет! Можешь полить цветы в комнате? Лейка снизу"
+npc_info = ExtResource("13_wlwyx")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("13_sj8u2")
+npc_info = ExtResource("8_xypn5")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_q31tk")
+text = "Хорошо"
+npc_info = ExtResource("8_xypn5")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("15_jo5ml")]
+position = Vector2(246, 164)
+signal_name = "selected"
+linked_quest = ExtResource("10_wlwyx")
+settings_summary = "UPDATE QUEST:
+Quest: Полить цеты
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("12_muph6")
+text = "Спасибо тебе!"
+npc_info = ExtResource("13_wlwyx")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_q31tk")
+text = "Нет! Не хочу"
+npc_info = ExtResource("8_xypn5")
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("12_muph6")
+text = "Ну и ладно..."
+npc_info = ExtResource("13_wlwyx")
+
+[node name="QuestActivatedSwitch" parent="." instance=ExtResource("9_r1gxd")]
+react_to_global_signal = true
+linked_quest = ExtResource("10_wlwyx")
+settings_summary = "UPDATE QUEST:
+Quest: Полить цеты
+Checking if player has quest"
+
+[node name="watering_can_pickup" parent="QuestActivatedSwitch" instance=ExtResource("17_iio0l")]
+position = Vector2(346, 332)
+item_data = ExtResource("18_ywqx2")
+
+[node name="QuestAdvanceTrigger" parent="QuestActivatedSwitch/watering_can_pickup" instance=ExtResource("15_jo5ml")]
+signal_name = "picked_up"
+linked_quest = ExtResource("10_wlwyx")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Полить цеты
+Step: 1 - найди лейку
+Complete: false"
+
+[node name="flowers" type="Node2D" parent="."]
+
+[node name="flower" parent="flowers" instance=ExtResource("19_ywqx2")]
+z_index = 1
+position = Vector2(70, 288)
+
+[node name="QuestAdvanceTrigger" parent="flowers/flower" instance=ExtResource("15_jo5ml")]
+position = Vector2(-182, -49)
+signal_name = "on_watered"
+linked_quest = ExtResource("10_wlwyx")
+quest_step = 2
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Полить цеты
+Step: 2 - полей цветы
+Complete: true"

@@ -1,0 +1,202 @@
+[gd_scene load_steps=21 format=4 uid="uid://b5n083hkloju6"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_1geo2"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_2720l"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_p7yvs"]
+[ext_resource type="PackedScene" uid="uid://31pn6icmlp0r" path="res://Tile Maps/dungeon_tilemap_layer.tscn" id="5_r7x40"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_i7tpf"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_1qcxi"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_p4d5u"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="9_7oc4b"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="11_r7x40"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="12_d7cr8"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="13_vuee6"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="14_daqm2"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="15_dag0l"]
+[ext_resource type="Resource" uid="uid://d3nlftmjbd8db" path="res://quests/remove_flora.tres" id="16_1qcxi"]
+[ext_resource type="Resource" uid="uid://wtyaf1au1mxo" path="res://npc/00_npcs/npc_03.tres" id="16_p4d5u"]
+[ext_resource type="Resource" uid="uid://dhr3255mp4lox" path="res://quests/beat_boss.tres" id="17_p4d5u"]
+[ext_resource type="Script" uid="uid://cf08jllkd640b" path="res://quests/utility_nodes/handlers/items_required_quest_handler.gd" id="18_7oc4b"]
+[ext_resource type="Resource" uid="uid://dsn25brd3t8mu" path="res://Items/souvenir.tres" id="19_18kjx"]
+[ext_resource type="Resource" uid="uid://b7ym1303dtaqq" path="res://npc/00_npcs/npc_gardener.tres" id="19_r7x40"]
+[ext_resource type="Script" uid="uid://bebllckckwvno" path="res://Levels/Area01/scene2_corpus_all_quests_completed_handler.gd" id="20_d7cr8"]
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_1geo2")
+music = ExtResource("2_2720l")
+
+[node name="DungeonTilemapLayer" parent="." instance=ExtResource("5_r7x40")]
+z_index = -1
+scale = Vector2(1.3, 1.3)
+tile_map_data = PackedByteArray("AAADAAMAAAAFAAEAAAADAAQAAAAFAAEAAAADAAUAAAAFAAEAAAADAAYAAAAFAAEAAAADAAcAAAAFAAEAAAADAAgAAAAGAAMAAAADAAkAAAAFAAEAAAADAAoAAAAFAAEAAAADAAsAAAAFAAEAAAADAAwAAAAFAAEAAAADAA0AAAAFAAEAAAADAA4AAAAFAAEAAAADAA8AAAAFAAEAAAADABAAAAAFAAIAAAADABEAAAABAAQAAAAEAAMAAAAFAAEAAAAEAAQAAAAFAAEAAAAEAAUAAAAFAAMAAAAEAAYAAAAGAAMAAAAEAAcAAAAFAAEAAAAEAAgAAAAFAAEAAAAEAAkAAAAFAAEAAAAEAAoAAAAFAAEAAAAEAAsAAAAFAAEAAAAEAAwAAAAFAAEAAAAEAA0AAAAFAAEAAAAEAA4AAAAFAAEAAAAEAA8AAAAIAAMAAAAEABAAAAAFAAIAAAAEABEAAAABAAQAAAAFAAMAAAAEAAMAAAAFAAQAAAAFAAEAAAAFAAUAAAAFAAEAAAAFAAYAAAAFAAEAAAAFAAcAAAAEAAMAAAAFAAgAAAAFAAEAAAAFAAkAAAAFAAEAAAAFAAoAAAAFAAEAAAAFAAsAAAAFAAEAAAAFAAwAAAAFAAEAAAAFAA0AAAAFAAEAAAAFAA4AAAAFAAEAAAAFAA8AAAAFAAEAAAAFABAAAAAFAAIAAAAFABEAAAABAAQAAAAGAAMAAAAHAAAAAAAGAAQAAAAHAAEAAAAGAAUAAAAHAAIAAAAGAAYAAAAFAAEAAAAGAAcAAAAFAAEAAAAGAAgAAAAFAAEAAAAGAAkAAAAFAAEAAAAGAAoAAAAFAAEAAAAGAAsAAAAFAAEAAAAGAAwAAAAFAAEAAAAGAA0AAAAFAAEAAAAGAA4AAAAFAAEAAAAGAA8AAAAFAAEAAAAGABAAAAAFAAIAAAAGABEAAAABAAQAAAAHAAMAAAAEAAMAAAAHAAQAAAAFAAEAAAAHAAUAAAAFAAEAAAAHAAYAAAAFAAEAAAAHAAcAAAAFAAEAAAAHAAgAAAAFAAEAAAAHAAkAAAAFAAEAAAAHAAoAAAAFAAEAAAAHAAsAAAAHAAAAAAAHAAwAAAAHAAEAAAAHAA0AAAAHAAIAAAAHAA4AAAAFAAEAAAAHAA8AAAAFAAEAAAAHABAAAAAFAAIAAAAHABEAAAABAAQAAAAIAAMAAAAFAAEAAAAIAAQAAAAFAAEAAAAIAAUAAAAFAAEAAAAIAAYAAAAFAAEAAAAIAAcAAAAFAAEAAAAIAAgAAAAFAAEAAAAIAAkAAAAFAAEAAAAIAAoAAAAFAAEAAAAIAAsAAAAIAAAAAAAIAAwAAAAIAAEAAAAIAA0AAAAIAAIAAAAIAA4AAAAFAAEAAAAIAA8AAAAFAAEAAAAIABAAAAAFAAIAAAAIABEAAAABAAQAAAAJAAMAAAAFAAEAAAAJAAQAAAAFAAEAAAAJAAUAAAAFAAMAAAAJAAYAAAAFAAEAAAAJAAcAAAAFAAEAAAAJAAgAAAAFAAEAAAAJAAkAAAAFAAEAAAAJAAoAAAAFAAEAAAAJAAsAAAAJAAAAAAAJAAwAAAAJAAEAAAAJAA0AAAAJAAIAAAAJAA4AAAAFAAEAAAAJAA8AAAAFAAEAAAAJABAAAAAFAAIAAAAJABEAAAABAAQAAAAKAAMAAAAFAAEAAAAKAAQAAAAFAAEAAAAKAAUAAAAFAAEAAAAKAAYAAAAHAAAAAAAKAAcAAAAHAAEAAAAKAAgAAAAHAAIAAAAKAAkAAAAFAAEAAAAKAAoAAAAFAAEAAAAKAAsAAAAFAAEAAAAKAAwAAAAFAAEAAAAKAA0AAAAFAAEAAAAKAA4AAAAFAAEAAAAKAA8AAAAFAAEAAAAKABAAAAAFAAIAAAAKABEAAAAFAAEAAAALAAMAAAAFAAEAAAALAAQAAAAGAAMAAAALAAUAAAAFAAEAAAALAAYAAAAIAAAAAAALAAcAAAAIAAEAAAALAAgAAAAIAAIAAAALAAkAAAAFAAEAAAALAAoAAAAFAAEAAAALAAsAAAAFAAEAAAALAAwAAAAFAAEAAAALAA0AAAAFAAEAAAALAA4AAAAFAAMAAAALAA8AAAAEAAMAAAALABAAAAAFAAIAAAALABEAAAAFAAEAAAAMAAMAAAAFAAEAAAAMAAQAAAAFAAEAAAAMAAUAAAAFAAEAAAAMAAYAAAAJAAAAAAAMAAcAAAAJAAEAAAAMAAgAAAAJAAIAAAAMAAkAAAAFAAEAAAAMAAoAAAAFAAEAAAAMAAsAAAAFAAEAAAAMAAwAAAAFAAEAAAAMAA0AAAAFAAEAAAAMAA4AAAAFAAEAAAAMAA8AAAAFAAEAAAAMABAAAAAFAAIAAAAMABEAAAAFAAEAAAANAAMAAAAFAAEAAAANAAQAAAAFAAEAAAANAAUAAAAFAAEAAAANAAYAAAAFAAEAAAANAAcAAAAFAAEAAAANAAgAAAAFAAEAAAANAAkAAAAFAAEAAAANAAoAAAAFAAEAAAANAAsAAAAFAAEAAAANAAwAAAAFAAEAAAANAA0AAAAFAAEAAAANAA4AAAAFAAEAAAANAA8AAAAFAAEAAAANABAAAAAFAAIAAAANABEAAAABAAQAAAAOAAMAAAAFAAEAAAAOAAQAAAAFAAEAAAAOAAUAAAAFAAEAAAAOAAYAAAAFAAEAAAAOAAcAAAAFAAEAAAAOAAgAAAAFAAEAAAAOAAkAAAAFAAEAAAAOAAoAAAAFAAEAAAAOAAsAAAAFAAEAAAAOAAwAAAAFAAEAAAAOAA0AAAAFAAEAAAAOAA4AAAAGAAMAAAAOAA8AAAAFAAEAAAAOABAAAAAFAAIAAAAOABEAAAABAAQAAAAPAAMAAAAFAAEAAAAPAAQAAAAFAAEAAAAPAAUAAAAFAAEAAAAPAAYAAAAFAAEAAAAPAAcAAAAFAAEAAAAPAAgAAAAFAAMAAAAPAAkAAAAFAAEAAAAPAAoAAAAFAAEAAAAPAAsAAAAFAAEAAAAPAAwAAAAFAAEAAAAPAA0AAAAFAAEAAAAPAA4AAAAFAAEAAAAPAA8AAAAFAAEAAAAPABAAAAAFAAIAAAAPABEAAAABAAQAAAAQAAMAAAAFAAEAAAAQAAQAAAAFAAEAAAAQAAUAAAAFAAEAAAAQAAYAAAAFAAEAAAAQAAcAAAAFAAEAAAAQAAgAAAAFAAEAAAAQAAkAAAAFAAEAAAAQAAoAAAAEAAMAAAAQAAsAAAAFAAEAAAAQAAwAAAAFAAEAAAAQAA0AAAAFAAEAAAAQAA4AAAAEAAMAAAAQAA8AAAAFAAEAAAAQABAAAAAFAAIAAAAQABEAAAABAAQAAAARAAMAAAAIAAIAAAARAAQAAAAFAAEAAAARAAUAAAAFAAEAAAARAAYAAAAFAAEAAAARAAcAAAAFAAEAAAARAAgAAAAFAAEAAAARAAkAAAAJAAAAAAARAAoAAAAJAAEAAAARAAsAAAAJAAIAAAARAAwAAAAFAAEAAAARAA0AAAAGAAMAAAARAA4AAAAJAAEAAAARAA8AAAAJAAIAAAARABAAAAAFAAIAAAARABEAAAABAAQAAAASAAMAAAAJAAIAAAASAAQAAAAFAAEAAAASAAUAAAAFAAEAAAASAAYAAAAGAAMAAAASAAcAAAAFAAEAAAASAAgAAAAFAAEAAAASAAkAAAAFAAEAAAASAAoAAAAFAAEAAAASAAsAAAAFAAEAAAASAAwAAAAFAAEAAAASAA0AAAAFAAEAAAASAA4AAAAFAAEAAAASAA8AAAAIAAMAAAASABAAAAAFAAIAAAASABEAAAABAAQAAAATAAMAAAAFAAEAAAATAAQAAAAFAAEAAAATAAUAAAAFAAEAAAATAAYAAAAFAAEAAAATAAcAAAAFAAEAAAATAAgAAAAFAAEAAAATAAkAAAAFAAEAAAATAAoAAAAFAAEAAAATAAsAAAAFAAEAAAATAAwAAAAFAAEAAAATAA0AAAAFAAEAAAATAA4AAAAFAAEAAAATAA8AAAAFAAMAAAATABAAAAAFAAIAAAATABEAAAABAAQAAAAUAAMAAAAGAAEAAAAUAAQAAAAGAAEAAAAUAAUAAAAGAAEAAAAUAAYAAAAGAAEAAAAUAAcAAAAGAAEAAAAUAAgAAAAGAAEAAAAUAAkAAAAGAAEAAAAUAAoAAAAGAAEAAAAUAAsAAAAGAAEAAAAUAAwAAAAGAAEAAAAUAA0AAAAGAAEAAAAUAA4AAAAGAAEAAAAUAA8AAAAGAAEAAAAUABAAAAAGAAIAAAAUABEAAAABAAQAAAAVAAMAAAADAAUAAAAVAAQAAAADAAUAAAAVAAUAAAADAAUAAAAVAAYAAAADAAUAAAAVAAcAAAADAAUAAAAVAAgAAAADAAUAAAAVAAkAAAADAAUAAAAVAAoAAAADAAUAAAAVAAsAAAADAAUAAAAVAAwAAAADAAUAAAAVAA0AAAADAAUAAAAVAA4AAAADAAUAAAAVAA8AAAADAAUAAAAVABAAAAADAAUAAAAVABEAAAACAAQAAAABAP7/AAAAAAMAAAABAP//AAAEAAUAAAABAAAAAAAEAAUAAAABAAEAAAAEAAUAAAABAAIAAAAEAAUAAAABAAMAAAAEAAUAAAABAAQAAAAEAAUAAAABAAUAAAAEAAUAAAABAAYAAAAEAAUAAAABAAcAAAAEAAUAAAABAAgAAAAEAAUAAAABAAkAAAAEAAUAAAABAAoAAAAEAAUAAAABAAsAAAAEAAUAAAABAAwAAAAEAAUAAAABAA0AAAAEAAUAAAABAA4AAAAEAAUAAAABAA8AAAAEAAUAAAABABAAAAAEAAUAAAABABEAAAAAAAQAAAACAP7/AAABAAMAAAACAP//AAAEAAAAAAACAAAAAAAEAAEAAAACAAEAAAAEAAEAAAACAAIAAAAEAAEAAAACAAMAAAAEAAEAAAACAAQAAAAEAAEAAAACAAUAAAAEAAEAAAACAAYAAAAEAAEAAAACAAcAAAAEAAEAAAACAAgAAAAEAAEAAAACAAkAAAAEAAEAAAACAAoAAAAEAAEAAAACAAsAAAAEAAEAAAACAAwAAAAEAAEAAAACAA0AAAAEAAEAAAACAA4AAAAEAAEAAAACAA8AAAAEAAEAAAACABAAAAAEAAIAAAACABEAAAABAAQAAAADAP7/AAABAAMAAAADAP//AAAFAAAAAAADAAAAAAAFAAEAAAADAAEAAAAFAAEAAAADAAIAAAAFAAEAAAAEAP7/AAABAAMAAAAEAP//AAAFAAAAAAAEAAAAAAAFAAEAAAAEAAEAAAAIAAMAAAAEAAIAAAAFAAEAAAAFAP7/AAABAAMAAAAFAP//AAAFAAAAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAEAAAAGAP7/AAABAAMAAAAGAP//AAAFAAAAAAAGAAAAAAAFAAEAAAAGAAEAAAAFAAEAAAAGAAIAAAAFAAEAAAAHAP7/AAABAAMAAAAHAP//AAAFAAAAAAAHAAAAAAAFAAEAAAAHAAEAAAAFAAEAAAAHAAIAAAAFAAEAAAAIAP7/AAABAAMAAAAIAP//AAAFAAAAAAAIAAAAAAAFAAEAAAAIAAEAAAAFAAEAAAAIAAIAAAAFAAEAAAAJAP7/AAABAAMAAAAJAP//AAAFAAAAAAAJAAAAAAAFAAEAAAAJAAEAAAAFAAEAAAAJAAIAAAAFAAEAAAAKAP7/AAABAAMAAAAKAP//AAAFAAAAAAAKAAAAAAAFAAEAAAAKAAEAAAAFAAEAAAAKAAIAAAAFAAEAAAALAP7/AAABAAMAAAALAP//AAAFAAAAAAALAAAAAAAGAAMAAAALAAEAAAAFAAEAAAALAAIAAAAFAAEAAAAMAP7/AAABAAMAAAAMAP//AAAFAAAAAAAMAAAAAAAFAAEAAAAMAAEAAAAFAAMAAAAMAAIAAAAFAAEAAAANAP7/AAABAAMAAAANAP//AAAFAAAAAAANAAAAAAAFAAEAAAANAAEAAAAFAAEAAAANAAIAAAAFAAEAAAAOAP7/AAABAAMAAAAOAP//AAAFAAAAAAAOAAAAAAAFAAEAAAAOAAEAAAAFAAEAAAAOAAIAAAAFAAEAAAAPAP7/AAABAAMAAAAPAP//AAAFAAAAAAAPAAAAAAAFAAEAAAAPAAEAAAAFAAEAAAAPAAIAAAAFAAEAAAAQAP7/AAABAAMAAAAQAP//AAAFAAAAAAAQAAAAAAAFAAEAAAAQAAEAAAAFAAEAAAAQAAIAAAAFAAEAAAARAP7/AAABAAMAAAARAP//AAAFAAAAAAARAAAAAAAFAAEAAAARAAEAAAAIAAAAAAARAAIAAAAIAAEAAAASAP7/AAABAAMAAAASAP//AAAFAAAAAAASAAAAAAAFAAEAAAASAAEAAAAIAAMAAAASAAIAAAAJAAEAAAATAP7/AAABAAMAAAATAP//AAAFAAAAAAATAAAAAAAFAAEAAAATAAEAAAAFAAEAAAATAAIAAAAFAAEAAAAUAP7/AAABAAMAAAAUAP//AAAGAAAAAAAUAAAAAAAGAAEAAAAUAAEAAAAGAAEAAAAUAAIAAAAGAAEAAAAVAP7/AAACAAMAAAAVAP//AAADAAUAAAAVAAAAAAADAAUAAAAVAAEAAAADAAUAAAAVAAIAAAADAAUAAAA=")
+tile_size = 22.0
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_p7yvs")]
+position = Vector2(240, 324)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_i7tpf")]
+position = Vector2(240, 352)
+level = "uid://b3eupcse8up0l"
+target_transition_area = "LevelTransitionCorpus"
+center_player = true
+size = 3
+side = 3
+
+[node name="NPC_NERO" parent="." instance=ExtResource("7_1qcxi")]
+position = Vector2(242, 174)
+npc_resource = ExtResource("8_p4d5u")
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" instance=ExtResource("9_7oc4b")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("16_1qcxi")
+settings_summary = "UPDATE QUEST:
+Quest: Постричь растения
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" instance=ExtResource("11_r7x40")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_d7cr8")
+text = "Привет! Мне нужно постричь пару растений на улице, поможешь мне?"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("13_vuee6")
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_daqm2")
+text = "Хорошо"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("15_dag0l")]
+position = Vector2(246, 164)
+signal_name = "selected"
+linked_quest = ExtResource("16_1qcxi")
+settings_summary = "UPDATE QUEST:
+Quest: Постричь растения
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("12_d7cr8")
+text = "Спасибо!"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_daqm2")
+text = "Нет! Не хочу"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("12_d7cr8")
+text = "Ну и ладно..."
+npc_info = ExtResource("8_p4d5u")
+
+[node name="NPC_NERO2" parent="." instance=ExtResource("7_1qcxi")]
+position = Vector2(94.2544, 280.543)
+npc_resource = ExtResource("16_p4d5u")
+sprite_animation_frames = Vector2(4, 1)
+sprite_animation_frame = 1
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO2" instance=ExtResource("9_7oc4b")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("17_p4d5u")
+settings_summary = "UPDATE QUEST:
+Quest: Победи босса
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO2/QuestActivatedSwitch" instance=ExtResource("11_r7x40")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_d7cr8")
+text = "Злой студент отобрал мое растение! Поможешь мне вернуть его?"
+npc_info = ExtResource("16_p4d5u")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("13_vuee6")
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_daqm2")
+text = "Да"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("15_dag0l")]
+position = Vector2(246, 164)
+signal_name = "selected"
+linked_quest = ExtResource("17_p4d5u")
+settings_summary = "UPDATE QUEST:
+Quest: Победи босса
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("12_d7cr8")
+text = "Спасибо! Он находится по дорожке справа от второго корпуса. Будь сторожен!"
+npc_info = ExtResource("16_p4d5u")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_daqm2")
+text = "Нет! Не хочу"
+npc_info = ExtResource("8_p4d5u")
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("12_d7cr8")
+text = "Ну и ладно..."
+npc_info = ExtResource("16_p4d5u")
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO2" instance=ExtResource("9_7oc4b")]
+check_type = 1
+react_to_global_signal = true
+linked_quest = ExtResource("17_p4d5u")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вернуть кольцо
+Checking if player has completed step: убей злого студента"
+
+[node name="DialogInteraction" parent="NPC_NERO2/QuestActivatedSwitch2" instance=ExtResource("11_r7x40")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch2/DialogInteraction"]
+script = ExtResource("12_d7cr8")
+text = "Спасибо за мое растение!"
+npc_info = ExtResource("16_p4d5u")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO2/QuestActivatedSwitch2/DialogInteraction" instance=ExtResource("15_dag0l")]
+position = Vector2(175, -143)
+signal_name = "finished"
+linked_quest = ExtResource("17_p4d5u")
+quest_step = 2
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Победи босса
+Step: 2 - верни кольцо студенту
+Complete: true"
+
+[node name="boss_quest_handler" type="Node2D" parent="NPC_NERO2/QuestActivatedSwitch2/DialogInteraction"]
+script = ExtResource("18_7oc4b")
+item_data = ExtResource("19_18kjx")
+
+[node name="all_quests_completed_handler" type="Node2D" parent="."]
+script = ExtResource("20_d7cr8")
+
+[node name="NPC_NERO3" parent="all_quests_completed_handler" instance=ExtResource("7_1qcxi")]
+position = Vector2(376, 280)
+npc_resource = ExtResource("19_r7x40")
+sprite_animation_frames = Vector2(5, 4)
+sprite_animation_frame = 1
+
+[node name="DialogInteraction" parent="all_quests_completed_handler/NPC_NERO3" instance=ExtResource("11_r7x40")]
+
+[node name="DialogText" type="Node" parent="all_quests_completed_handler/NPC_NERO3/DialogInteraction"]
+script = ExtResource("12_d7cr8")
+text = "Ты завершил все задания!"
+npc_info = ExtResource("16_p4d5u")
+
+[node name="DialogText2" type="Node" parent="all_quests_completed_handler/NPC_NERO3/DialogInteraction"]
+script = ExtResource("12_d7cr8")
+text = "Подойди с скриншотом игры к разработчику и получи приз"
+npc_info = ExtResource("16_p4d5u")

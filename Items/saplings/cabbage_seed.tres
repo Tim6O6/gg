@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Sapling" load_steps=8 format=3 uid="uid://efb4yfeibu1d"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_64mp8"]
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="2_l3o00"]
+[ext_resource type="Resource" uid="uid://exwsofhx0umk" path="res://Items/cabbage.tres" id="3_64mp8"]
+[ext_resource type="Script" uid="uid://ccnlaupl3qndu" path="res://Items/scripts/sapling.gd" id="4_32ayi"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="5_4g5hr"]
+
+[sub_resource type="Resource" id="Resource_l3o00"]
+script = ExtResource("2_l3o00")
+item = ExtResource("3_64mp8")
+quantity = 1
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfkvn"]
+atlas = ExtResource("5_4g5hr")
+region = Rect2(32, 80, 16, 16)
+
+[resource]
+script = ExtResource("4_32ayi")
+grow_levels = 8
+grow_time = 10.0
+grow_reward_xp = 150
+grow_rewards = Array[ExtResource("2_l3o00")]([SubResource("Resource_l3o00")])
+name = "Капустное семя"
+description = "Капустное семя. Растёт 15 секунд"
+texture = SubResource("AtlasTexture_wfkvn")
+cost = 1
+effects = Array[ExtResource("1_64mp8")]([])
+metadata/_custom_type_script = "uid://ccnlaupl3qndu"

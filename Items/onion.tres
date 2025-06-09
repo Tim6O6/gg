@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://dy8f6ncc2ndo"]
+
+[ext_resource type="Script" uid="uid://bwq22ry1guuwt" path="res://Items/item_effects/item_effect.gd" id="1_uyph1"]
+[ext_resource type="Script" uid="uid://b405hrw22am82" path="res://Items/scripts/item_data.gd" id="2_tnhh0"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="5_1mph8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn054"]
+atlas = ExtResource("5_1mph8")
+region = Rect2(144, 112, 16, 16)
+
+[resource]
+script = ExtResource("2_tnhh0")
+name = "Лук"
+description = ""
+texture = SubResource("AtlasTexture_yn054")
+cost = 10
+effects = Array[ExtResource("1_uyph1")]([])
+metadata/_custom_type_script = "uid://b405hrw22am82"

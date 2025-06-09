@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://d3nlftmjbd8db"]
+
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="1_v7m66"]
+[ext_resource type="Resource" uid="uid://dx43alwldj3lt" path="res://Items/saplings/onion_seed.tres" id="2_qe8cc"]
+[ext_resource type="Script" uid="uid://ej3xbi7xbvg1" path="res://quests/scripts/quest_resource.gd" id="4_q15lf"]
+
+[sub_resource type="Resource" id="Resource_qe8cc"]
+script = ExtResource("1_v7m66")
+item = ExtResource("2_qe8cc")
+quantity = 3
+metadata/_custom_type_script = "uid://b73hijmin5dn2"
+
+[resource]
+script = ExtResource("4_q15lf")
+title = "Постричь растения"
+description = "Постриги 4 растения с улицы"
+steps = Array[String](["Постриги растения"])
+reward_xp = 200
+reward_items = Array[ExtResource("1_v7m66")]([SubResource("Resource_qe8cc")])

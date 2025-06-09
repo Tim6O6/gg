@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://o2gjsd7ai12j"]
+
+[ext_resource type="Script" uid="uid://digp8uokallv6" path="res://Props/Plants/unwatered_plant.gd" id="1_eexy3"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="2_7jaf4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eexy3"]
+atlas = ExtResource("2_7jaf4")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jaf4"]
+radius = 44.0114
+
+[sub_resource type="Animation" id="Animation_eexy3"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite_node/sprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(32, 48, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_7jaf4"]
+resource_name = "watered"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite_node/sprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(48, 48, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jaf4"]
+_data = {
+&"RESET": SubResource("Animation_eexy3"),
+&"watered": SubResource("Animation_7jaf4")
+}
+
+[node name="flower" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_eexy3")
+
+[node name="sprite_node" type="Node2D" parent="."]
+
+[node name="sprite" type="Sprite2D" parent="sprite_node"]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(10, 10)
+scale = Vector2(1.25, 1.25)
+texture = SubResource("AtlasTexture_eexy3")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("CircleShape2D_7jaf4")
+
+[node name="ap" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7jaf4")
+}

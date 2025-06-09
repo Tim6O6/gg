@@ -1,0 +1,178 @@
+[gd_scene load_steps=21 format=4 uid="uid://btaitoxju13l3"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_sdgs6"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_3ntkr"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_dnfn6"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_e2ede"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_wui8i"]
+[ext_resource type="Texture2D" uid="uid://81r5fkwf6jju" path="res://assets/дом ботанического сада и теплица.png" id="7_sdgs6"]
+[ext_resource type="PackedScene" uid="uid://bkuwee42m3nct" path="res://Props/Plants/sapling.tscn" id="8_sdgs6"]
+[ext_resource type="Script" uid="uid://g21dtba0der6" path="res://Levels/Area01/saplings.gd" id="8_wui8i"]
+[ext_resource type="PackedScene" uid="uid://cpohuml8sje4u" path="res://Items/item_pickup/item_pickup.tscn" id="10_ej5r0"]
+[ext_resource type="Resource" uid="uid://efb4yfeibu1d" path="res://Items/saplings/cabbage_seed.tres" id="11_ej5r0"]
+[ext_resource type="Script" uid="uid://hnbut78s4mxw" path="res://Levels/Area01/scene3_quest_handler.gd" id="12_oglpr"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="12_wc3fa"]
+[ext_resource type="Resource" uid="uid://xggbfmqgg8vq" path="res://quests/grow_cabbage.tres" id="14_ni1we"]
+[ext_resource type="PackedScene" uid="uid://bwppesqootpqu" path="res://Enemies/Slime/slime2.tscn" id="15_7uioi"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="15_ni1we"]
+[ext_resource type="PackedScene" uid="uid://b7x3cvq6i0qvf" path="res://Enemies/Slime/slime.tscn" id="15_wc3fa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwift"]
+size = Vector2(163, 107)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdgs6"]
+size = Vector2(112.5, 64.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vojwh"]
+size = Vector2(700, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffhhm"]
+size = Vector2(36, 426)
+
+[node name="scene3" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_sdgs6")
+music = ExtResource("2_3ntkr")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_dnfn6")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAKAP//AQAGAAYAAAAKAAAAAQAGAAYAAAAKAAEAAQAIAAYAACAKAAIAAQAGAAYAAAAKAAMAAQAGAAYAAAAKAAQAAQAGAAYAAAAKAAUAAQAHAAgAACAKAAYAAQAHAAcAACAKAAcAAQAIAAcAACAKAAgAAQAGAAYAAAAKAAkAAQAGAAYAAAALAP//AQAHAAgAACALAAAAAQAHAAgAACALAAEAAQAIAAgAACALAAIAAQAGAAYAAAALAAMAAQAIAAcAACALAAQAAQAHAAYAACALAAUAAQAGAAYAAAALAAYAAQAGAAYAAAALAAcAAQAJAAgAACALAAgAAQAJAAgAACALAAkAAQAGAAYAAAAMAP//AQAJAAYAACAMAAAAAQAGAAYAAAAMAAEAAQAGAAYAAAAMAAIAAQAHAAgAACAMAAMAAQAGAAYAAAAMAAQAAQAGAAYAAAAMAAUAAQAGAAYAAAAMAAYAAQAGAAYAAAAMAAcAAQAHAAcAACAMAAgAAQAJAAcAACAMAAkAAQAJAAcAACANAP//AQAGAAYAAAANAAAAAQAHAAgAAAANAAEAAQAGAAYAAAANAAIAAQAHAAgAAAANAAMAAQAHAAYAAAANAAQAAQAHAAYAAAANAAUAAQAIAAcAAAANAAYAAQAGAAYAAAANAAcAAQAJAAgAAAANAAgAAQAGAAYAAAANAAkAAQAJAAcAAAAOAP//AQATAAIAAAAOAAAAAQATAAIAAAAOAAEAAQATAAIAAAAOAAIAAQATAAIAAAAOAAMAAQATAAIAAAAOAAQAAQATAAIAAAAOAAUAAQATAAIAAAAOAAYAAQATAAIAAAAOAAcAAQATAAIAAAAOAAgAAQATAAIAAAAOAAkAAQATAAIAAAAPAP//AQAUAAIAAAAPAAAAAQAUAAIAAAAPAAEAAQAUAAIAAAAPAAIAAQAUAAIAAAAPAAMAAQAUAAIAAAAPAAQAAQAUAAIAAAAPAAUAAQAUAAIAAAAPAAYAAQAUAAIAAAAPAAcAAQAUAAIAAAAPAAgAAQAUAAIAAAAPAAkAAQAUAAIAAAAQAP//AQAVAAIAAAAQAAAAAQAVAAIAAAAQAAEAAQAVAAIAAAAQAAIAAQAVAAIAAAAQAAMAAQAVAAIAAAAQAAQAAQAVAAIAAAAQAAUAAQAVAAIAAAAQAAYAAQAVAAIAAAAQAAcAAQAVAAIAAAAQAAgAAQAVAAIAAAAQAAkAAQAVAAIAAAARAP//AQAGAAYAAAARAAAAAQAIAAYAAAARAAEAAQAGAAYAAAARAAIAAQAHAAcAAAARAAMAAQAGAAYAAAARAAQAAQAGAAYAAAARAAUAAQAGAAYAAAARAAYAAQAHAAYAAAARAAcAAQAGAAYAAAARAAgAAQAJAAYAAAARAAkAAQAJAAcAAAD+////AQAGAAYAAAAFAAYAAQAGAAYAAAAGAAcAAQAGAAYAAAAGAAgAAQAGAAYAAAAHAAgAAQAGAAYAAAAHAAkAAQAJAAgAACAIAAkAAQAJAAcAACD+/wAAAQAIAAYAACD+/wEAAQAGAAYAAAD+/wIAAQAGAAYAAAD+/wMAAQAGAAYAAAD+/wQAAQAHAAcAAAD+/wUAAQAGAAYAAAD+/wYAAQAGAAYAAAD+/wcAAQAGAAYAAAD+/wgAAQAGAAYAAAD+/wkAAQAIAAYAACD/////AQAGAAYAAAD//wYAAQAGAAYAAAD//wcAAQAGAAYAAAD//wgAAQAGAAYAAAD//wkAAQAGAAYAAAAAAP//AQAGAAYAAAAAAAYAAQAGAAYAAAAAAAcAAQAIAAcAACAAAAgAAQAGAAYAAAAAAAkAAQAIAAgAACABAP//AQAGAAYAAAABAAYAAQAGAAYAAAABAAcAAQAIAAgAACABAAgAAQAGAAYAAAABAAkAAQAJAAcAACACAP//AQAGAAYAAAACAAYAAQAGAAYAAAACAAcAAQAIAAcAACACAAgAAQAHAAcAACACAAkAAQAHAAgAACADAP//AQAGAAYAAAADAAYAAQAGAAYAAAADAAcAAQAHAAcAACADAAgAAQAGAAYAAAADAAkAAQAIAAcAACAEAP//AQAGAAYAAAAEAAYAAQAGAAYAAAAEAAcAAQAGAAYAAAAEAAgAAQAGAAYAAAAEAAkAAQAGAAYAAAAFAP//AQAJAAYAACAFAAAAAQAIAAcAACAFAAEAAQAIAAgAACAFAAIAAQAGAAYAAAAFAAMAAQAHAAYAACAFAAQAAQAGAAYAAAAFAAcAAQAGAAYAAAAFAAgAAQAGAAYAAAAFAAkAAQAJAAYAACAGAP//AQAGAAYAAAAGAAAAAQAGAAYAAAAGAAEAAQAGAAYAAAAGAAIAAQAGAAYAAAAGAAMAAQAJAAgAACAGAAQAAQAIAAgAACAGAAYAAQAGAAYAAAAGAAkAAQAGAAYAAAAHAP//AQAIAAcAACAHAAAAAQAHAAYAACAHAAEAAQAJAAcAACAHAAIAAQAGAAYAAAAHAAMAAQAGAAYAAAAHAAQAAQAHAAgAACAHAAUAAQAHAAgAACAHAAYAAQAGAAYAAAAHAAcAAQAGAAYAAAAIAP//AQAIAAgAACAIAAAAAQAJAAgAACAIAAEAAQAIAAgAACAIAAIAAQAGAAYAAAAIAAMAAQAJAAcAACAIAAQAAQAGAAYAAAAIAAUAAQAIAAYAACAIAAYAAQAGAAYAAAAIAAcAAQAGAAYAAAAIAAgAAQAIAAYAACAJAP//AQAHAAYAACAJAAAAAQAGAAYAAAAJAAEAAQAJAAYAACAJAAIAAQAGAAYAAAAJAAMAAQAIAAYAACAJAAQAAQAGAAYAAAAJAAUAAQAGAAYAAAAJAAYAAQAIAAgAACAJAAcAAQAGAAYAAAAJAAgAAQAGAAYAAAAJAAkAAQAGAAYAAAD//wAAAQAIAAgAACD//wEAAQAIAAgAACD//wIAAQAGAAYAAAD//wMAAQAGAAYAAAD//wQAAQAGAAYAAAAAAAAAAQACAAYAAAAAAAEAAQACAAcAAAAAAAIAAQACAAcAAAAAAAMAAQACAAcAAAAAAAQAAQACAAgAAAABAAAAAQADAAYAAAABAAEAAQADAAcAAAABAAIAAQADAAcAAAABAAMAAQADAAcAAAABAAQAAQADAAgAAAACAAAAAQADAAYAAAACAAEAAQADAAcAAAACAAIAAQADAAcAAAACAAMAAQADAAcAAAACAAQAAQADAAgAAAADAAAAAQADAAYAAAADAAEAAQADAAcAAAADAAIAAQADAAcAAAADAAMAAQADAAcAAAADAAQAAQADAAgAAAAEAAAAAQAEAAYAAAAEAAEAAQAEAAcAAAAEAAIAAQAEAAcAAAAEAAMAAQAEAAcAAAAEAAQAAQAEAAgAAAADAAUAAQAGAAYAAAAEAAUAAQAGAAYAAAD//wUAAQAHAAcAAAAAAAUAAQAGAAYAAAABAAUAAQAGAAYAAAACAAUAAQAGAAYAAAAGAAUAAQAHAAcAAAAFAAUAAQAGAAYAAAARAAoAAQAGAAYAAAAQAAoAAQAVAAIAAAAPAAoAAQAUAAIAAAAOAAoAAQATAAIAAAANAAoAAQAGAAYAAAAMAAoAAQAJAAgAAAALAAoAAQAGAAYAAAAKAAoAAQAGAAYAAAAJAAoAAQAGAAYAAAAIAAoAAQAGAAYAAAAHAAoAAQAGAAYAAAAGAAoAAQAGAAYAAAAFAAoAAQAGAAYAAAAEAAoAAQAGAAYAAAADAAoAAQAGAAYAAAACAAoAAQAGAAYAAAABAAoAAQAIAAgAAAAAAAoAAQAGAAYAAAD//woAAQAGAAYAAAD+/woAAQAGAAYAAAA=")
+
+[node name="DecorOutsideTilemapLayer" parent="." instance=ExtResource("3_dnfn6")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAMAAUAAQAFAAEAAAANAAgAAQAFAAEAAAAHAAUAAQAFAAEAAAD/////AQAFAAEAAAALAAQAAQACAAAAAAARAAAAAQACAAAAAAD+/wUAAQADAAAAAAAMAP//AQADAAAAAAD//woAAQAIAAIAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_e2ede")]
+position = Vector2(496, 294)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_wui8i")]
+position = Vector2(498, 333)
+level = "uid://b3eupcse8up0l"
+target_transition_area = "LevelTransitionNext"
+center_player = true
+size = 3
+side = 3
+
+[node name="LevelTransitionNext" parent="." instance=ExtResource("6_wui8i")]
+position = Vector2(496, -16)
+level = "uid://bv5b7yw3o6pnb"
+center_player = true
+side = 2
+
+[node name="uni" type="StaticBody2D" parent="."]
+position = Vector2(145, 211)
+collision_layer = 16
+collision_mask = 0
+
+[node name="sprite" type="Sprite2D" parent="uni"]
+scale = Vector2(0.790902, 0.790902)
+texture = ExtResource("7_sdgs6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="uni"]
+position = Vector2(-59.5, 10.5)
+shape = SubResource("RectangleShape2D_bwift")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="uni"]
+position = Vector2(79.75, 19.625)
+shape = SubResource("RectangleShape2D_sdgs6")
+
+[node name="LevelTransitionCorpus" parent="." instance=ExtResource("6_wui8i")]
+position = Vector2(86, 288)
+level = "uid://cn8jrnhorxlyb"
+center_player = true
+size = 1
+side = 2
+
+[node name="colliders" type="Node2D" parent="."]
+position = Vector2(417, -32)
+
+[node name="collider" type="StaticBody2D" parent="colliders"]
+position = Vector2(-163, 400)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider"]
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider2" type="StaticBody2D" parent="colliders"]
+position = Vector2(-162, -19)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider2"]
+shape = SubResource("RectangleShape2D_vojwh")
+
+[node name="collider3" type="StaticBody2D" parent="colliders"]
+position = Vector2(-499, 190)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider3"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="collider4" type="StaticBody2D" parent="colliders"]
+position = Vector2(176, 188)
+collision_layer = 16
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="colliders/collider4"]
+shape = SubResource("RectangleShape2D_ffhhm")
+
+[node name="saplings" type="Node2D" parent="."]
+position = Vector2(27, 27)
+script = ExtResource("8_wui8i")
+
+[node name="_sapling_tmp" parent="saplings" instance=ExtResource("8_sdgs6")]
+
+[node name="QuestActivatedSwitch" parent="." instance=ExtResource("12_wc3fa")]
+linked_quest = ExtResource("14_ni1we")
+settings_summary = "UPDATE QUEST:
+Quest: Вырастить капусту
+Checking if player has quest"
+
+[node name="quest_handler" type="Node2D" parent="QuestActivatedSwitch"]
+position = Vector2(27, 27)
+script = ExtResource("12_oglpr")
+
+[node name="QuestAdvanceTrigger" parent="QuestActivatedSwitch/quest_handler" instance=ExtResource("15_ni1we")]
+linked_quest = ExtResource("14_ni1we")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вырастить капусту
+Step: 1 - посади семена и вырасти капусту
+Complete: false"
+
+[node name="ItemsQuestActivatedSwitch" parent="QuestActivatedSwitch/quest_handler" instance=ExtResource("12_wc3fa")]
+position = Vector2(-74, -271)
+check_type = 2
+linked_quest = ExtResource("14_ni1we")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вырастить капусту
+Check if player is on step: посади семена и вырасти капусту"
+
+[node name="ItemPickup1" parent="QuestActivatedSwitch/quest_handler/ItemsQuestActivatedSwitch" instance=ExtResource("10_ej5r0")]
+position = Vector2(224, 325)
+item_data = ExtResource("11_ej5r0")
+
+[node name="ItemPickup2" parent="QuestActivatedSwitch/quest_handler/ItemsQuestActivatedSwitch" instance=ExtResource("10_ej5r0")]
+position = Vector2(241, 325)
+item_data = ExtResource("11_ej5r0")
+
+[node name="ItemPickup3" parent="QuestActivatedSwitch/quest_handler/ItemsQuestActivatedSwitch" instance=ExtResource("10_ej5r0")]
+position = Vector2(259, 325)
+item_data = ExtResource("11_ej5r0")
+
+[node name="ItemPickup4" parent="QuestActivatedSwitch/quest_handler/ItemsQuestActivatedSwitch" instance=ExtResource("10_ej5r0")]
+position = Vector2(277, 325)
+item_data = ExtResource("11_ej5r0")
+
+[node name="ItemPickup5" parent="QuestActivatedSwitch/quest_handler/ItemsQuestActivatedSwitch" instance=ExtResource("10_ej5r0")]
+position = Vector2(294, 325)
+item_data = ExtResource("11_ej5r0")
+
+[node name="watermelon_hedgedog" parent="." instance=ExtResource("15_7uioi")]
+position = Vector2(305, 238)
+
+[node name="orange_squirrel" parent="." instance=ExtResource("15_wc3fa")]
+position = Vector2(349, 17)

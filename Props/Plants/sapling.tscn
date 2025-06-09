@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkuwee42m3nct"]
+
+[ext_resource type="Script" uid="uid://dwql4snocw63h" path="res://Props/Plants/sapling.gd" id="1_gpy7f"]
+[ext_resource type="Texture2D" uid="uid://j14dtmnsfrgg" path="res://assets/Farm.png" id="1_xbopm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpy7f"]
+resource_local_to_scene = true
+atlas = ExtResource("1_xbopm")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpy7f"]
+size = Vector2(24, 24)
+
+[sub_resource type="Animation" id="Animation_0m5vh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite_node:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1i4b3"]
+resource_name = "grown"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite_node:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.7),
+"transitions": PackedFloat32Array(0.5, -2, 0.5, -2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0), Vector2(0, -1.5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ynx7"]
+_data = {
+&"RESET": SubResource("Animation_0m5vh"),
+&"grown": SubResource("Animation_1i4b3")
+}
+
+[node name="sapling" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_gpy7f")
+
+[node name="sprite_node" type="Node2D" parent="."]
+
+[node name="test" type="ColorRect" parent="sprite_node"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 1, 1, 0.415)
+
+[node name="sprite" type="Sprite2D" parent="sprite_node"]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(10, 10)
+scale = Vector2(1.25, 1.25)
+texture = SubResource("AtlasTexture_gpy7f")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_gpy7f")
+
+[node name="ap" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8ynx7")
+}

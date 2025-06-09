@@ -1,0 +1,127 @@
+[gd_scene load_steps=18 format=4 uid="uid://cn8jrnhorxlyb"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_6cce3"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_txq2x"]
+[ext_resource type="PackedScene" uid="uid://ck115jsxh5khr" path="res://Tile Maps/outside_tilemap_layer.tscn" id="3_pune6"]
+[ext_resource type="PackedScene" uid="uid://diex2e34r23qo" path="res://Tile Maps/shop_tilemap_layer.tscn" id="4_hu6d2"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_jrxkq"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_4u42v"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_yq8wm"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_fkdcm"]
+[ext_resource type="Resource" uid="uid://csvi3x1wp3gy6" path="res://npc/00_npcs/npc_01.tres" id="8_txq2x"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="9_mxw5o"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="11_y0usi"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="12_0c8hw"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="13_hw6kd"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="14_sk5yh"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="15_vxwnq"]
+[ext_resource type="Script" uid="uid://bnin8sy3rnris" path="res://Levels/Area01/scene3_inner_quest_handler.gd" id="17_txq2x"]
+[ext_resource type="Resource" uid="uid://xggbfmqgg8vq" path="res://quests/grow_cabbage.tres" id="18_pune6"]
+
+[node name="02" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_6cce3")
+music = ExtResource("2_txq2x")
+
+[node name="OutsideTilemapLayer" parent="." instance=ExtResource("3_pune6")]
+
+[node name="OutsideDecorTilemapLayer" parent="." instance=ExtResource("3_pune6")]
+
+[node name="ShopTilemapLayer" parent="." instance=ExtResource("4_hu6d2")]
+tile_map_data = PackedByteArray("AAAFAAsAAAAEAAUAAAAEAAsAAAAEAAUAAAADAAsAAAAEAAUAAAACAAsAAAAEAAUAAAABAAsAAAAEAAUAAAAJAAsAAAAEAAUAAAAKAAsAAAAEAAUAAAALAAsAAAAEAAUAAAAMAAsAAAAEAAUAAAANAAsAAAAEAAUAAAAAAAsAAAACAAUAAAAOAAsAAAAGAAUAAAAGAAsAAAAEAAQAAAAHAAsAAAAEAAQAAAAIAAsAAAAEAAQAAAAAAAoAAAACAAQAAAAAAAkAAAACAAQAAAAAAAgAAAACAAQAAAAAAAcAAAACAAQAAAAAAAYAAAACAAQAAAAAAAUAAAACAAQAAAAAAAQAAAACAAQAAAAAAAMAAAACAAQAAAAAAAIAAAACAAQAAAAAAAEAAAACAAQAAAANAAAAAAAEAAIAAAAMAAAAAAAEAAIAAAALAAAAAAAEAAIAAAAKAAAAAAAEAAIAAAAJAAAAAAAEAAIAAAAIAAAAAAAEAAIAAAAHAAAAAAAEAAIAAAAGAAAAAAAEAAIAAAAFAAAAAAAEAAIAAAAEAAAAAAAEAAIAAAADAAAAAAAEAAIAAAACAAAAAAAEAAIAAAABAAAAAAAEAAIAAAAAAAAAAAACAAIAAAAOAAAAAAAGAAIAAAABAAEAAAADAAMAAAABAAIAAAADAAQAAAABAAMAAAADAAMAAAABAAQAAAADAAQAAAABAAUAAAADAAMAAAABAAYAAAADAAQAAAABAAcAAAADAAMAAAABAAgAAAADAAQAAAABAAkAAAADAAMAAAABAAoAAAADAAQAAAACAAEAAAAEAAMAAAACAAIAAAAEAAQAAAACAAMAAAAEAAMAAAACAAQAAAAEAAQAAAACAAUAAAAEAAMAAAACAAYAAAAEAAQAAAACAAcAAAAEAAMAAAACAAgAAAAEAAQAAAACAAkAAAAEAAMAAAACAAoAAAAEAAQAAAADAAEAAAAFAAMAAAADAAIAAAAFAAQAAAADAAMAAAADAAMAAAADAAQAAAADAAQAAAADAAUAAAADAAMAAAADAAYAAAADAAQAAAADAAcAAAADAAMAAAADAAgAAAADAAQAAAADAAkAAAAFAAMAAAADAAoAAAAFAAQAAAAEAAEAAAAFAAMAAAAEAAIAAAAFAAQAAAAEAAMAAAAEAAMAAAAEAAQAAAAEAAQAAAAEAAUAAAAEAAMAAAAEAAYAAAAEAAQAAAAEAAcAAAAEAAMAAAAEAAgAAAAEAAQAAAAEAAkAAAADAAMAAAAEAAoAAAADAAQAAAAFAAEAAAADAAMAAAAFAAIAAAADAAQAAAAFAAMAAAAFAAMAAAAFAAQAAAAFAAQAAAAFAAUAAAAFAAMAAAAFAAYAAAAFAAQAAAAFAAcAAAAFAAMAAAAFAAgAAAAFAAQAAAAFAAkAAAAEAAMAAAAFAAoAAAAEAAQAAAAGAAEAAAAEAAMAAAAGAAIAAAAEAAQAAAAGAAMAAAADAAMAAAAGAAQAAAADAAQAAAAGAAUAAAADAAMAAAAGAAYAAAADAAQAAAAGAAcAAAADAAMAAAAGAAgAAAADAAQAAAAGAAkAAAAFAAMAAAAGAAoAAAAFAAQAAAAHAAEAAAAFAAMAAAAHAAIAAAAFAAQAAAAHAAMAAAAEAAMAAAAHAAQAAAAEAAQAAAAHAAUAAAAEAAMAAAAHAAYAAAAEAAQAAAAHAAcAAAAEAAMAAAAHAAgAAAAEAAQAAAAHAAkAAAAEAAMAAAAHAAoAAAAEAAQAAAAIAAEAAAADAAMAAAAIAAIAAAADAAQAAAAIAAMAAAADAAMAAAAIAAQAAAADAAQAAAAIAAUAAAAFAAMAAAAIAAYAAAAFAAQAAAAIAAcAAAAFAAMAAAAIAAgAAAAFAAQAAAAIAAkAAAAFAAMAAAAIAAoAAAAFAAQAAAAJAAEAAAAEAAMAAAAJAAIAAAAEAAQAAAAJAAMAAAAEAAMAAAAJAAQAAAAEAAQAAAAJAAUAAAADAAMAAAAJAAYAAAADAAQAAAAJAAcAAAADAAMAAAAJAAgAAAADAAQAAAAJAAkAAAADAAMAAAAJAAoAAAADAAQAAAAKAAEAAAAFAAMAAAAKAAIAAAAFAAQAAAAKAAMAAAAFAAMAAAAKAAQAAAAFAAQAAAAKAAUAAAAEAAMAAAAKAAYAAAAEAAQAAAAKAAcAAAAEAAMAAAAKAAgAAAAEAAQAAAAKAAkAAAAEAAMAAAAKAAoAAAAEAAQAAAALAAEAAAADAAMAAAALAAIAAAADAAQAAAALAAMAAAADAAMAAAALAAQAAAADAAQAAAALAAUAAAAFAAMAAAALAAYAAAAFAAQAAAALAAcAAAAFAAMAAAALAAgAAAAFAAQAAAALAAkAAAADAAQAAAALAAoAAAADAAQAAAAMAAEAAAAEAAMAAAAMAAIAAAAEAAQAAAAMAAQAAAAEAAMAAAAMAAUAAAAEAAMAAAAMAAYAAAAEAAMAAAAMAAcAAAAEAAMAAAAMAAgAAAAEAAQAAAAMAAkAAAAEAAQAAAAMAAoAAAAEAAQAAAANAAEAAAAFAAMAAAANAAIAAAAFAAQAAAANAAUAAAAFAAMAAAANAAYAAAAFAAMAAAANAAcAAAAFAAMAAAANAAgAAAAFAAQAAAANAAkAAAAFAAQAAAANAAoAAAAFAAQAAAAOAAEAAAAGAAQAAAAOAAIAAAAGAAQAAAAOAAQAAAAGAAQAAAAOAAUAAAAGAAQAAAAOAAYAAAAGAAQAAAAOAAcAAAAGAAQAAAAOAAgAAAAGAAQAAAAOAAkAAAAGAAQAAAAOAAoAAAAGAAQAAAAMAAMAAAAEAAMAAAANAAMAAAAFAAMAAAAOAAMAAAAGAAQAAAANAAQAAAAFAAMAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_jrxkq")]
+position = Vector2(240, 324)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_4u42v")]
+position = Vector2(240, 352)
+level = "uid://btaitoxju13l3"
+target_transition_area = "LevelTransitionInner"
+center_player = true
+size = 3
+side = 3
+
+[node name="NPC_NERO" parent="." instance=ExtResource("7_yq8wm")]
+position = Vector2(238, 181)
+npc_resource = ExtResource("8_txq2x")
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" instance=ExtResource("9_mxw5o")]
+remove_when_activated = true
+remove_when_completed = null
+react_to_global_signal = true
+linked_quest = ExtResource("18_pune6")
+settings_summary = "UPDATE QUEST:
+Quest: Постричь растения
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" instance=ExtResource("11_y0usi")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("12_0c8hw")
+text = "Привет! Можешь вырастить мне 5 капуст из семян?"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("13_hw6kd")
+npc_info = ExtResource("8_fkdcm")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_sk5yh")
+text = "Смогу"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("15_vxwnq")]
+position = Vector2(246, 164)
+signal_name = "selected"
+linked_quest = ExtResource("18_pune6")
+settings_summary = "UPDATE QUEST:
+Quest: Вырасти капусту
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("12_0c8hw")
+text = "Спасибо!"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("14_sk5yh")
+text = "Нет"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("12_0c8hw")
+text = "Ладно"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO" instance=ExtResource("9_mxw5o")]
+check_type = 1
+remove_when_completed = true
+react_to_global_signal = true
+linked_quest = ExtResource("18_pune6")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Вырастить капусту
+Checking if player has completed step: посади семена и вырасти капусту"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch2" instance=ExtResource("11_y0usi")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch2/DialogInteraction"]
+script = ExtResource("12_0c8hw")
+text = "Спасибо за капусту! Вот твоя награда"
+npc_info = ExtResource("8_fkdcm")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch2/DialogInteraction" instance=ExtResource("15_vxwnq")]
+position = Vector2(8, -17)
+signal_name = "finished"
+linked_quest = ExtResource("18_pune6")
+quest_step = 2
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Вырасти капусту
+Step: 2 - принеси выращенную капусту обратно
+Complete: true"
+
+[node name="quest_handler" type="Node2D" parent="NPC_NERO/QuestActivatedSwitch2/DialogInteraction"]
+position = Vector2(27, 27)
+script = ExtResource("17_txq2x")
